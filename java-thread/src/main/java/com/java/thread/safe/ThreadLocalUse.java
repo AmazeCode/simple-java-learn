@@ -1,15 +1,15 @@
 package com.java.thread.safe;
 
 /**
- * ThreadLocal例子
- * 什么是ThreadLocal:给每个线程提供局部变量,解决线程安全
+ * ThreadLocal使用
+ * ThreadLocal:为线程提供共享局部变量,解决线程安全
  * ThreadLocal底层是map
  */
-public class ThreadLocalDemo extends Thread{
+public class ThreadLocalUse extends Thread{
 
     private Res res;
 
-    public ThreadLocalDemo(Res res){
+    public ThreadLocalUse(Res res){
         this.res = res;
     }
 
@@ -22,25 +22,23 @@ public class ThreadLocalDemo extends Thread{
 
     public static void main(String[] args) {
         Res res = new Res();
-        ThreadLocalDemo t1 = new ThreadLocalDemo(res);
-        ThreadLocalDemo t2 = new ThreadLocalDemo(res);
-
+        ThreadLocalUse t1 = new ThreadLocalUse(res);
+        ThreadLocalUse t2 = new ThreadLocalUse(res);
         t1.start();
         t2.start();
     }
 }
 
 class Res{
-    /*
-        ThreadLocal,避免数据共享
-     */
-    public static ThreadLocal<Integer> threadLocal = new ThreadLocal<Integer>(){
 
-        protected Integer initialValue(){
+    public static ThreadLocal<Integer> threadLocal = new ThreadLocal<Integer>(){
+        @Override
+        protected Integer initialValue() {
             return 0;
-        };
+        }
     };
-    public Integer getNumber(){
+
+    public int getNumber(){
         //从threadLocal中获取值
         int count = threadLocal.get()+1;
         //往threadLocal中存值

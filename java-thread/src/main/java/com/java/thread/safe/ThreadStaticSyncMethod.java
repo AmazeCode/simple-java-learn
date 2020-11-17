@@ -1,26 +1,20 @@
 package com.java.thread.safe;
 
+
 /**
- * 死锁线程
- * 结论：避免使用同步嵌套同步的形式
+ * 线程安全-静态同步方法
+ * (验证:非静态同步方法使用的时什么锁呢？)
  */
-public class DeadLockThread {
+public class ThreadStaticSyncMethod {
 
-    /*
-          1、线程安全问题
-          什么是线程安全问题: 当多个线程共享一个全局变量,注意写操作可能受到其他线程的干扰，
-          读操作是不会发生线程安全。---java内存模型
-      */
-    public static void main(String[] args) throws InterruptedException{
-
-        //1、创建线程
-        DeadLockThreadDemo deadLockThreadDemo = new DeadLockThreadDemo();
-        Thread t1 = new Thread(deadLockThreadDemo,"窗口1");
-        Thread t2 = new Thread(deadLockThreadDemo,"窗口2");
+    public static void main(String[] args) throws InterruptedException {
+        ThreadStaticSyncMethodDemo threadStaticSyncMethodDemo = new ThreadStaticSyncMethodDemo();
+        Thread t1 = new Thread(threadStaticSyncMethodDemo,"窗口1");
+        Thread t2 = new Thread(threadStaticSyncMethodDemo,"窗口2");
         //启动线程
         t1.start();
         Thread.sleep(40);
-        deadLockThreadDemo.flag = false;
+        threadStaticSyncMethodDemo.flag = false;
         t2.start();
     }
 }
@@ -31,9 +25,11 @@ public class DeadLockThread {
     1、非静态同步方法使用的时this锁
     2、静态同步方法使用的是当前class字节码文件
  */
-class DeadLockThreadDemo implements Runnable{
+class ThreadStaticSyncMethodDemo implements Runnable{
+
     //同时多个窗口共享100
     private static int count = 100;
+    //定义锁
     private static Object obj = new Object();
     public boolean flag = true;
 
@@ -41,20 +37,17 @@ class DeadLockThreadDemo implements Runnable{
     public void run() {
         if(flag){
             while(count>0){
-                /*
-                   死锁产生的原因:
-                   1、 t1先获取obj锁,再获取this锁
-                   2、 t2先获取this锁,再获取obj锁
-                   由于程序是并行的,t1获取的this锁被t2占用，t2获取的obj锁被t1给占用,因此造成了线程的等待,故产生了死锁
-                 */
-                synchronized(obj){
-                    //时间堆积模拟死锁问题（正式编程的时候不要把不需要同步的代码放到代码块中）
+                //参数使用obj不能同步,原因是obj是自定义的并不是锁
+                synchronized(this){
                     try{
-                        Thread.sleep(10);
+                        Thread.sleep(20);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    sale();
+                    if(count>0){
+                        System.out.println(Thread.currentThread().getName()+",出售"+(100-count+1)+"张票");
+                        count--;
+                    }
                 }
             }
         }else{
@@ -77,10 +70,10 @@ class DeadLockThreadDemo implements Runnable{
 
         显示锁(Lock)
      */
-    public synchronized void sale(){//加上static的同步方法锁使用的是当前的字节码文件
-        synchronized(obj){//参数接收任意的全局变量
+    public static synchronized void sale(){
+        synchronized(ThreadStaticSyncMethodDemo.class){//当前class的字节码文件
             try{
-                Thread.sleep(10);
+                Thread.sleep(20);
             }catch (Exception e){
                 e.printStackTrace();
             }

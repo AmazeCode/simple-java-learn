@@ -1,33 +1,35 @@
 package com.java.thread.safe;
 
 /**
- * 同步代码块:一个线程
+ * 线程安全-同步块(多线程)
  */
-public class SyncBlockOneThread {
-    /*
-            1、线程安全问题
-            什么是线程安全问题: 当多个线程共享一个全局变量,注意写操作可能受到其他线程的干扰，
-            读操作是不会发生线程安全。---java内存模型
-         */
+public class ThreadMutilSyncBlock {
+
     public static void main(String[] args) {
 
-        //1、创建线程
-        SyncBlockOneThreadDemo syncBlockOneThreadDemo = new SyncBlockOneThreadDemo();
-        Thread t1 = new Thread(syncBlockOneThreadDemo,"窗口1");
-        Thread t2 = new Thread(syncBlockOneThreadDemo,"窗口2");
-        Thread t3 = new Thread(syncBlockOneThreadDemo,"窗口3");
+        //创建线程
+        ThreadMutilSyncBlockDemo threadMutilSyncBlockDemo1 = new ThreadMutilSyncBlockDemo();
+        ThreadMutilSyncBlockDemo threadMutilSyncBlockDemo2 = new ThreadMutilSyncBlockDemo();
+        Thread t1 = new Thread(threadMutilSyncBlockDemo1,"窗口1");
+        Thread t2 = new Thread(threadMutilSyncBlockDemo2,"窗口2");
         //启动线程
         t1.start();
         t2.start();
-        t3.start();
     }
 }
 
-class SyncBlockOneThreadDemo implements Runnable{
-    //同时多个窗口共享100
-    private int count = 100;
+class ThreadMutilSyncBlockDemo implements Runnable{
 
-    private Object obj = new Object();
+    /*
+       创建两个线程的情况,代码块的参数需要静态化,共享的全局参数也需要静态化
+    */
+    //同时多个窗口共享100
+    private static int count = 100;
+
+    /*
+      定义锁,static 类型的全局变量是存放在方法区的,供所有线程共享(java内存结构)
+     */
+    private static Object obj = new Object();
 
     @Override
     public void run() {
@@ -50,7 +52,7 @@ class SyncBlockOneThreadDemo implements Runnable{
         显示锁(Lock)
      */
     public void sale(){
-        synchronized(obj){//参数接收任意的全局变量
+        synchronized (obj){//参数接收任意的全局变量
             if(count>0){
                 System.out.println(Thread.currentThread().getName()+",出售"+(100-count+1)+"张票");
                 count--;
