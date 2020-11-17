@@ -1,28 +1,32 @@
 package com.java.thread.safe;
 
 /**
- * 线程安全,线程锁(synchronized)
+ * 线程安全-同步代码块（单线程）
  */
-public class ThreadSafe {
+public class ThreadOneSyncBlock {
 
     /*
-        1、线程安全问题
-        什么是线程安全问题: 当多个线程共享一个全局变量,注意写操作可能受到其他线程的干扰，
-        读操作是不会发生线程安全。---java内存模型
+      1、线程安全问题
+      什么是线程安全问题: 当多个线程共享一个全局变量,注意写操作可能受到其他线程的干扰，
+      读操作是不会发生线程安全。---java内存模型
      */
     public static void main(String[] args) {
-
-        SafeDemo safeDemo = new SafeDemo();
-        Thread t1 = new Thread(safeDemo,"窗口1");
-        Thread t2 = new Thread(safeDemo,"窗口2");
+        //创建线程
+        ThreadOneSyncBlockDemo threadOneSyncBlockDemo = new ThreadOneSyncBlockDemo();
+        Thread t1 = new Thread();
+        Thread t2 = new Thread();
+        //启动线程
         t1.start();
         t2.start();
     }
 }
 
-class SafeDemo implements Runnable{
-    //同时多个窗口共享100
+class ThreadOneSyncBlockDemo implements Runnable{
+
+    //全局共享变量
     private int count = 100;
+    //定义锁
+    private Object obj = new Object();
 
     @Override
     public void run() {
@@ -44,10 +48,12 @@ class SafeDemo implements Runnable{
 
         显示锁(Lock)
      */
-    public synchronized void sale(){
-        if(count>0){
-            System.out.println(Thread.currentThread().getName()+":"+(100-count+1)+"张票");
-            count--;
+    public void sale(){
+        synchronized(obj){//参数接收任意的全局变量
+            if(count>0){
+                System.out.println(Thread.currentThread().getName()+",出售"+(100-count+1)+"张票");
+                count--;
+            }
         }
     }
 }
