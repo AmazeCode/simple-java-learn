@@ -12,6 +12,7 @@ public class ThreadMutilSyncBlock {
         ThreadMutilSyncBlockDemo threadMutilSyncBlockDemo2 = new ThreadMutilSyncBlockDemo();
         Thread t1 = new Thread(threadMutilSyncBlockDemo1,"窗口1");
         Thread t2 = new Thread(threadMutilSyncBlockDemo2,"窗口2");
+        System.out.println("");
         //启动线程
         t1.start();
         t2.start();
@@ -52,7 +53,7 @@ class ThreadMutilSyncBlockDemo implements Runnable{
         显示锁(Lock)
      */
     public void sale(){
-        synchronized (obj){//参数接收任意的全局变量
+        synchronized (obj){//自定义锁
             if(count>0){
                 System.out.println(Thread.currentThread().getName()+",出售"+(100-count+1)+"张票");
                 count--;

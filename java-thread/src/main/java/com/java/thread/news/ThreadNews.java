@@ -27,12 +27,14 @@ class ProduceThread extends Thread{
 
     @Override
     public void run() {
+
         int count = 0;
+
         while(true){
             synchronized (res){
                 try{
                     if(res.flag == true){
-                        res.wait();//释放当前锁对象
+                        res.wait();//让线程等待,释放当前锁对象
                     }
                     Thread.sleep(1000);
                 }catch (Exception e){
@@ -46,6 +48,7 @@ class ProduceThread extends Thread{
                     res.name = "小军";
                     res.sex = "男";
                 }
+                //修改count值
                 count = (count+1)%2;//0 1 0 1
                 res.flag = true;//标记当前线程为等待
                 res.notify();//唤醒被等待的线程
@@ -75,7 +78,7 @@ class ConsumerThread extends Thread{
             synchronized (res){
                 try{
                     if(res.flag == false){
-                        res.wait();
+                        res.wait();//线程进入等待,自动释放锁
                     }
                 }catch (Exception e){
                     e.printStackTrace();

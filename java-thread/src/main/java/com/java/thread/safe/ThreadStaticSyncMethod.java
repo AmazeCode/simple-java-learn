@@ -13,7 +13,6 @@ public class ThreadStaticSyncMethod {
         Thread t2 = new Thread(threadStaticSyncMethodDemo,"窗口2");
         //启动线程
         t1.start();
-        Thread.sleep(40);
         threadStaticSyncMethodDemo.flag = false;
         t2.start();
     }
@@ -31,6 +30,7 @@ class ThreadStaticSyncMethodDemo implements Runnable{
     private static int count = 100;
     //定义锁
     private static Object obj = new Object();
+    //标志位
     public boolean flag = true;
 
     @Override
@@ -39,11 +39,6 @@ class ThreadStaticSyncMethodDemo implements Runnable{
             while(count>0){
                 //参数使用obj不能同步,原因是obj是自定义的并不是锁
                 synchronized(this){
-                    try{
-                        Thread.sleep(20);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
                     if(count>0){
                         System.out.println(Thread.currentThread().getName()+",出售"+(100-count+1)+"张票");
                         count--;
@@ -72,11 +67,6 @@ class ThreadStaticSyncMethodDemo implements Runnable{
      */
     public static synchronized void sale(){
         synchronized(ThreadStaticSyncMethodDemo.class){//当前class的字节码文件
-            try{
-                Thread.sleep(20);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
             if(count>0){
                 System.out.println(Thread.currentThread().getName()+",出售"+(100-count+1)+"张票");
                 count--;

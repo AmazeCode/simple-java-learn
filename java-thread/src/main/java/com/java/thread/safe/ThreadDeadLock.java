@@ -23,7 +23,7 @@ public class ThreadDeadLock {
 /*
     非静态同步方法使用的时什么锁呢？
     得出结论:
-    1、非静态同步方法使用的时this锁
+    1、非静态同步方法使用的是this锁
     2、静态同步方法使用的是当前class字节码文件
  */
 class ThreadDeadLockDemo implements Runnable{
@@ -41,7 +41,7 @@ class ThreadDeadLockDemo implements Runnable{
             while(count>0){
                 /*
                    死锁产生的原因:
-                   1、 t1先获取obj锁,再获取this锁
+                   1、 t1先获取obj锁,再获取this锁,再获取obj锁
                    2、 t2先获取this锁,再获取obj锁
                    由于程序是并行的,t1获取的this锁被t2占用，t2获取的obj锁被t1给占用,因此造成了线程的等待,故产生了死锁
                  */
@@ -75,7 +75,7 @@ class ThreadDeadLockDemo implements Runnable{
 
         显示锁(Lock)
      */
-    public synchronized void sale(){//加上static的同步方法锁使用的是当前的字节码文件
+    public synchronized void sale(){
         synchronized(obj){//参数接收任意的全局变量
             try{
                 Thread.sleep(10);

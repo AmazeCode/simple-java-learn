@@ -29,7 +29,7 @@ class ThreadSyncMethodDemo implements Runnable{
         }
     }
 
-    public synchronized void sale() {
+    public synchronized void sale() {//使用的是this锁
         if(count>0){
             System.out.println(Thread.currentThread().getName()+":"+(100-count+1)+"张票");
             count--;

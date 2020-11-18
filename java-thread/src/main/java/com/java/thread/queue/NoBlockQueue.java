@@ -12,7 +12,7 @@ public class NoBlockQueue {
      */
     public static void main(String[] args) {
 
-        //
+        //非阻塞队列
         ConcurrentLinkedQueue<String> concurrentLinkedQueue = new ConcurrentLinkedQueue<String>();
         concurrentLinkedQueue.offer("小张");
         concurrentLinkedQueue.offer("小李");
