@@ -61,7 +61,7 @@ class ProducerThread implements Runnable{
         try{
             while(FLAG){
                 String data = atomicInteger.incrementAndGet()+ "";
-                //像队列中存值
+                //向队列中存值
                 boolean offer = blockingQueue.offer(data,2, TimeUnit.SECONDS);
                 if(offer){
                     System.out.println("生产者存入队列成功！"+ data);
@@ -92,8 +92,6 @@ class ConsumerThead implements Runnable{
     private BlockingQueue<String> blockingQueue;
     //添加volatile保证可见性以及拒绝重排序，这里可以不用加，因为此时只是在本地内存中操作的
     private volatile boolean FLAG = true;
-    //原子类
-    AtomicInteger atomicInteger = new AtomicInteger();
 
     /**
      * 构造方法

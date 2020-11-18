@@ -50,7 +50,7 @@ class ProduceThread extends Thread{
                 }
                 //修改count值
                 count = (count+1)%2;//0 1 0 1
-                res.flag = true;//标记当前线程为等待
+                res.flag = true;
                 res.notify();//唤醒被等待的线程
             }
         }
@@ -96,13 +96,10 @@ class ConsumerThread extends Thread{
  共享对象
  */
 class Res{
-
     //姓名
     public String name;
-
     //年龄
     public String sex;
-
     /*
         为true的情况下：允许读不允许写
         为false的情况下：允许写不允许读
