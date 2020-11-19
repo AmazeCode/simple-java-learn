@@ -53,6 +53,37 @@ Executors
 3、newScheduledThreadPool 创建一个定时线程池，支持定时及周期性人物执行。      
 4、newSingleThreadExecutor创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序（FIFO、LIFO、优先级）执行。    
 
+##### 线程池原理分析(地城其实就是一个HashSet)
+任何用的线程池都是通过ThreadPoolExecutor封装起来的
+corePoolSize:核心线程数，表示指实际运行的线程数     
+maximumPoolSize:最大线程数，表示最多创建多少个线程   (corePoolSize只能小于等于maximumPoolSize)
+如果当前线程池中的线程数目小于corePoolSize,则每来一任务,就会创建一个线程去执行这个任务;    
+如果当前线程池中的线程数目>=corePoolSize,则每来一个任务,会尝试将其添加到任务缓存队列中,若添加成功,则该任务会等待空闲线程将其取出执行;若添加失败（一般来说任务缓存队列已满）,则会创建新的线程去执行这个任务;    
+如果队列已经满了,则总线程数不大于maximumPoolSize的前提下,则创建新的线程  
+如果当前线程池中的数目达到maximumPoolSize,则会采取任务拒绝策略进行处理     
+如果线程池中的线程数大于corePoolSize时,如果某线程空闲时间超过keepAliveTime,线程将被终止,直至线程池中的数据不大于corePoolSize;如果允许为核心线程池中的线程设置存活时间,那么核心线程池中的线程空闲时间超过keepAliveTime,线程也会被终止。    
+流程图参考：/resources/pic/线程池原理.png    
+总结:   
+   所谓线程池本质是一个hashSet。多余的任务会放在阻塞队列中。先使用核心线程,核心线程被用完后，存放阻塞队列，只有当阻塞队列满了后，才会触发非核心线程的创建。
+   所以非核心线程只是临时过来打杂的。直到空闲了(keepAliveTime超时)，然后自己关闭了,直至线程数小于corePoolSize。
+   线程池提供了两个钩子(beforeExecute，afterExecute)给我们，我们继承线程池，在执行任务前后做一些事情。
+   线程池原理关键技术：锁(lock,cas)、阻塞队列、hashSet(资源池)      
+   
+ThreadPoolExecutor提供了四种拒绝策略：    
+1、ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常；也是默认的处理方式。    
+2、ThreadPoolExecutor.DiscardPolicy：丢弃任务，但是不抛出异常。     
+3、ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）     
+4、ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务，可以通过实现RejectedExecutionHandler接口自定义处理方式。   
+##### 为什么线程池要用阻塞队列？
+使用阻塞队列的最大作用是能够等待核心线程数去执行任务(核心线程执行的时候肯定是需要时间的,核心线程释放资源后,阻塞队列进行出列,保证资源的复用),假如核心线程一直在执行非阻塞队列那么非阻塞队列不会阻塞立马会进行出列，但是核心线程数是不会执行的，可能会导致线程池挂掉。   
+##### 合理配置线程池原则：CPU密集、IO密集
+1、CPU密集：该任务(run方法代码)需要大量的运算，而没有阻塞的情况下，CPU全速运行
+
+ 
+
+
+
+
  
 
   

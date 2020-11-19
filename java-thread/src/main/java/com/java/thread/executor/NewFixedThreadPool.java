@@ -11,6 +11,8 @@ public class NewFixedThreadPool {
     public static void main(String[] args) {
         /*
             newFixedThreadPool底层用的是BlockingQueue队列，超过3个的线程就放到阻塞队列中，一旦有人去消费的时候，才会出列，进行执行任务
+            corePoolSize:核心线程数3个
+            maximumPoolSize：最大线程数也是3个
          */
         // 可固定长度线程池  参数为最大线程数
         ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(3);
