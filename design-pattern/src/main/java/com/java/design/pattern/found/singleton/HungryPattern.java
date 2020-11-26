@@ -20,6 +20,7 @@ public class HungryPattern {
     /*
         问题：多线程情况下会有线程安全问题吗？
         多个线程去读同一个全局变量的时候,不会产生线程安全问题,因为加了static final不能被改变
+        (不推荐使用)
      */
     public static HungryPattern getInstance(){
         return hungryPattern;

@@ -1,7 +1,7 @@
 package com.java.design.pattern.found.singleton;
 
 /**
- * 静态内部类方式实现单例；
+ * 静态内部类方式实现单例(推荐使用)
  */
 public class StaticInnerClassPattern {
 
@@ -14,7 +14,10 @@ public class StaticInnerClassPattern {
     //私有构造方法(一定层度上防止反射攻击)
     private StaticInnerClassPattern() {}
 
-    //获得对象实例
+    /*
+        第一次加载StaticInnerClassPattern类时并不会初始化instance，只有第一次调用getInstance方法时虚拟机加载SingletonHolder 并初始化instance ，
+        这样不仅能确保线程安全也能保证Singleton类的唯一性，所以推荐使用静态内部类单例模式。
+     */
     public static StaticInnerClassPattern getInstance() {
         return SingletonHolder.instance;
     }
