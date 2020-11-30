@@ -9,7 +9,7 @@ package com.java.design.pattern.factory.abs;
 public class Client {
 
     public static void main(String[] args) {
-        CarFactory carFactory = new AbstraceJiLiFactory();
+        AbstractFactory carFactory = new JiLiFactory();
         Engine engine = carFactory.createEngine();
         Chair chair = carFactory.createChair();
         engine.run();

@@ -1,16 +1,16 @@
 package com.java.design.pattern.factory.abs;
 
 /**
- * @Description: 座椅
- * @Author: zhangyadong
- * @Date: 2020/11/28 22:28
- * @Version: v1.0
+ * 抽象产品:座椅工厂,让实际供应商实现具体产品
  */
 public interface Chair {
 
     void run();
 }
 
+/**
+ * 实际供应商
+ */
 class ChairA implements Chair{
 
     public void run(){
@@ -18,6 +18,9 @@ class ChairA implements Chair{
     }
 }
 
+/**
+ * 实际供应商
+ */
 class ChairB implements Chair{
 
     public void run(){

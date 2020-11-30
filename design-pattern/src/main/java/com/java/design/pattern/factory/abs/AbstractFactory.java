@@ -1,12 +1,9 @@
 package com.java.design.pattern.factory.abs;
 
 /**
- * @Description: 包装厂
- * @Author: zhangyadong
- * @Date: 2020/11/28 22:30
- * @Version: v1.0
+ * 定义抽象工厂：因为比较复杂，不知道如何实现，所以只是定义接口
  */
-public interface CarFactory {
+public interface AbstractFactory {
 
     //创建发动机
     Engine createEngine();

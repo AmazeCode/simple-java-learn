@@ -21,20 +21,22 @@ public class InvocationHandlerImpl implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
         //开启事物
-        System.out.println("动态代理-开启事物");
+        System.out.println("JDK动态代理-开启事物");
         Object invoke = method.invoke(target,args);
-        System.out.println("动态代理-结束事物");
+        System.out.println("JDK动态代理-结束事物");
         return invoke;
     }
 
     public static void main(String[] args) throws Exception{
         IUserDao iUserDao = new IUserDaoImpl();
         InvocationHandlerImpl invocationHandler = new InvocationHandlerImpl(iUserDao);
+        /*
+            反射获取类的信息
+         */
         //获取类加载器
         ClassLoader classLoader = iUserDao.getClass().getClassLoader();
-        //获取当前实现的接口(用于判断类是否实现了接口)
+        //获取当前实现的接口(用于判断类是否实现了接口,JDK动态代理操作的是接口)
         Class<?>[] face = iUserDao.getClass().getInterfaces();
         //调用动态代理实例
         IUserDao iUserDao1 = (IUserDao) Proxy.newProxyInstance(classLoader,face,invocationHandler);

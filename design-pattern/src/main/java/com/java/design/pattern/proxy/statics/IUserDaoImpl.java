@@ -1,10 +1,7 @@
 package com.java.design.pattern.proxy.statics;
 
 /**
- * @Description: TODO
- * @Author: zhangyadong
- * @Date: 2020/11/28 22:51
- * @Version: v1.0
+ * 定义实现方式
  */
 public class IUserDaoImpl implements IUserDao {
 

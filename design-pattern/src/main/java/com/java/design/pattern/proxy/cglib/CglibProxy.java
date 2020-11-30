@@ -8,13 +8,13 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 /**
- * @Description: TODO
- * @Author: zhangyadong
- * @Date: 2020/11/29 14:44
- * @Version: v1.0
+ * Cglib动态代理
  */
 public class CglibProxy implements MethodInterceptor {
 
+    /*
+        代理对象
+     */
     private Object target;
 
     public Object getInstance(Object target){
@@ -43,6 +43,7 @@ public class CglibProxy implements MethodInterceptor {
     //日志控制层打印日志 AOP技术，环绕通知之前之后进行拦截参数打印
     public static void main(String[] args) {
         CglibProxy cglibProxy = new CglibProxy();
+        //Cglib操作的是类
         IUserDaoImpl iUserDao = (IUserDaoImpl) cglibProxy.getInstance(new IUserDaoImpl());
         iUserDao.add();
     }

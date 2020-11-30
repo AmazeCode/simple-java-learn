@@ -1,12 +1,9 @@
 package com.java.design.pattern.factory.abs;
 
 /**
- * @Description: 抽象工厂
- * @Author: zhangyadong
- * @Date: 2020/11/28 22:32
- * @Version: v1.0
+ * 吉利工厂:实际工厂来生产这两种产品
  */
-public class AbstraceJiLiFactory implements CarFactory{
+public class JiLiFactory implements AbstractFactory {
 
     @Override
     public Engine createEngine() {

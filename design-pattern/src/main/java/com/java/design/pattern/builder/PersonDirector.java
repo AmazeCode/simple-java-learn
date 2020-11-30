@@ -7,6 +7,8 @@ public class PersonDirector {
 
     /*
         创建人物
+        建造者模式和工厂模式的区别：
+        工厂模式注重的是整体对象的创建方法，而建造者模式注重的是对象的创建过程，创建对象的过程方法可以在创建时自由调整
      */
     public Person createPerson(PersonBuilder personBuilder){
         personBuilder.builderHead();
