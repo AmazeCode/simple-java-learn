@@ -10,11 +10,11 @@ import java.lang.reflect.Method;
 public class ReflectDemo {
 
     /*
-            思考:
-            1、在构造函数中发生异常对象会创建成功吗？---答案是不会的
-            2、如果把构造函数私有化的时候,在当前类反射是可以拿到类的信息的,但是放到其他类是不能拿到类的信息的
-            3、怎么防止被反射攻击: 设置成私有的构造函数,在构造函数中抛出异常,防止反射攻击(判断是否创建过对象,如果创建过对象构造函数直接抛出异常)
-         */
+       思考:
+       1、在构造函数中发生异常对象会创建成功吗？---答案是不会的
+       2、如果把构造函数私有化的时候,在当前类反射是可以拿到类的信息的,但是放到其他类是不能拿到类的信息的
+       3、怎么防止被反射攻击: 设置成私有的构造函数,在构造函数中抛出异常,防止反射攻击(判断是否创建过对象,如果创建过对象构造函数直接抛出异常)
+    */
     public static void main(String[] args) throws Exception{
         //1、初始化的操作，无参构造函数
         /*UserEntity userEntity = new UserEntity();
@@ -26,7 +26,7 @@ public class ReflectDemo {
         UserEntity userEntity = (UserEntity)forName.newInstance();
         userEntity.userName = "反射对象";
         System.out.println(userEntity.userName);
-        //4、反射的应用场景（jdbc）、spring IOC底层使用的是反射机制+DOM4j实现，框架Hibernate、mybatis使用的是反射
+        //4、反射的应用场景（jdbc）、spring IOC底层使用的是反射机制+DOM4j实现,框架Hibernate、mybatis使用的是反射
         //5、使用反射机制去获取类的方法信息
         Method[] methods = forName.getMethods();
         for(Method method : methods){

@@ -77,8 +77,29 @@ CGLIB是针对类实现代理，主要是对指定的类生成一个子类，覆
 ##### 适配器
 适配器分类：类适配器、对象适配器、接口适配器方式    
 类适配器方式采用继承方式，对象适配方式采用构造函数传递   
-例子：OutputStreamWriter将输出字符流变为字节流；InputStreamReader：将输入的字节流变为字符流     
-SpringMvc中适配器，主要做请求拦截和分发的
+例子：   
+1、OutputStreamWriter将输出字符流变为字节流；   
+2、InputStreamReader：将输入的字节流变为字符流     
+3、SpringMvc中适配器，主要做请求拦截和分发的;    
+4、java类库中把String[]转换成list的时候可以使用适配器,注意到List<T> Arrays.asList(T[])就相当于一个转换器，它可以把数组转换为List。
+```java
+String[] exist = new String[] {"Good", "morning", "Bob", "and", "Alice"};
+Set<String> set = new HashSet<>(Arrays.asList(exist));
+```
+5、假设我们持有一个InputStream，希望调用readText(Reader)方法，但它的参数类型是Reader而不是InputStream，怎么办？
+  当然是使用适配器，把InputStream“变成”Reader  
+```java
+InputStream input = Files.newInputStream(Paths.get("/path/to/file"));
+Reader reader = new InputStreamReader(input, "UTF-8");
+readText(reader);
+```
+6、如果我们把readText(Reader)方法参数从Reader改为FileReader，会有什么问题？这个时候，因为我们需要一个FileReader类型，就必须把InputStream适配为FileReader   
+```java
+FileReader reader = new InputStreamReader(input, "UTF-8"); // compile error!
+```
+直接使用InputStreamReader这个Adapter是不行的，因为它只能转换出Reader接口。事实上，要把InputStream转换为FileReader也不是不可能，但需要花费十倍以上的功夫。
+这时，面向抽象编程这一原则就体现出了威力：持有高层接口不但代码更灵活，而且把各种接口组合起来也更容易。一旦持有某个具体的子类类型，要想做一些改动就非常困难。    
+
 
 
 
