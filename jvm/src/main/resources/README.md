@@ -157,7 +157,30 @@ CPU时间与墙钟时间的区别是,墙钟时间包括各种非运算的等待�
 -Xms512m -Xmx512m -XX:+PrintGCDetails -XX:+HeapDumpOnOutOfMemoryError -XX:+UseConcMarkSweepGC -XX:PermSize=32M
 ```
 CMS回收器配置堆的初始值和最大值一致的情况下(512M),测试的垃圾回收次数是0次,最大的吞吐量是1400左右
-
+4、G1垃圾回收()
+```java
+-Xms512m -Xmx512m -XX:+PrintGCDetails -XX:+HeapDumpOnOutOfMemoryError -XX:+UseG1GC -XX:PermSize=32M
+```
+##### JVM监控工具
+jdk自带jconsole(jdk安装目录/bin/jconsole.exe)、(jdk安装目录/bin/jvisualvm.exe)   
+##### 字节码技术
+可以使用字节码对类的基本信息做操作,新增属性或者方法、类、修改属性或者方法、删除属性或者方法     
+应用场景：AOP技术、Lombok去除重复代码插件、动态修改class文件等
+##### 常见的字节码操作类库
+1、BCEL:BCEL在实际的jvm指令层次操作,和汇编程序打交道     
+2、ASM：是一个轻量级的java字节码操作框架，直接涉及到JVM底层的操作和指令。高性能、高质量      
+3、CGLIB：生成类库,基于ASM       
+4、javassit(重点)：是一个开源的分析,编辑和创建Java字节码的类库。性能较ASM差，跟CGLIB差不多,但使用简单。很多开源框架都在使用它     
+优点:1、比反射开销小,性能高,但低于ASM    
+局限性：jdk5.0新语法不支持(包括泛型、枚举)，不支持注解修改,但可以通过底层的javassit类来解决；不支持数组的初始化，如String[]{"1","2"}],除非只有数组的容量为1    
+不支持内部类和匿名类     
+不支持continue和break表达式     
+对于继承关系,有些不支持如：
+```java
+class A{}
+class B extends A{}
+class C extends B{}
+```
 
              
 
