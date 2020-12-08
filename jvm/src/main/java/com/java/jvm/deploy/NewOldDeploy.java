@@ -11,7 +11,8 @@ public class NewOldDeploy {
     /*
         示例：-Xms20m -Xmx20m -Xmn1m -XX:SurvivorRatio=2 -XX:+PrintGCDetails -XX:+UseSerialGC -XX:NewRatio=2
         说明:堆内存初始化值20m,堆内存最大值20m,新生代最大值可用1m,eden空间和from/to空间的比例为2/1
-        -XX:+UseSerialGC为配置串行回收
+        -XX:SurvivorRatio=2 配置新生代中,eden区以及from区和to区的比例为2:1:1
+        -XX:+UseSerialGC 为配置串行回收
         -XX:NewRatio=2 配置新生代与老年代的比例为 1:2
      */
     public static void main(String[] args) {
