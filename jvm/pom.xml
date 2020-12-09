@@ -12,5 +12,12 @@
     <groupId>com.java.jvm</groupId>
     <artifactId>jvm</artifactId>
 
-
+    <dependencies>
+        <!-- 字节码jar -->
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.12.1.GA</version>
+        </dependency>
+    </dependencies>
 </project>
