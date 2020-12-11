@@ -6,12 +6,12 @@ package com.java.design.pattern.factory.abs;
 public class JiLiFactory implements AbstractFactory {
 
     @Override
-    public Engine createEngine() {
+    public EngineFactory createEngine() {
         return new EngineA();
     }
 
     @Override
-    public Chair createChair() {
+    public ChairFactory createChair() {
         return new ChairA();
     }
 }

@@ -4,13 +4,14 @@ import javassist.*;
 
 /**
  * 使用java字节码创建字节码
+ * Lombok插件使用的就是字节码技术
  */
 public class ByteCodeCreatClass {
 
     public static void main(String[] args) throws Exception{
 
         ClassPool pool = ClassPool.getDefault();
-        //1、创建User类
+        //1、创建User类、存放包路径
         CtClass userClass = pool.makeClass("com.java.jvm.bytecode.User");
         //2、创建name,age属性
         CtField nameField = CtField.make("private String name;",userClass);

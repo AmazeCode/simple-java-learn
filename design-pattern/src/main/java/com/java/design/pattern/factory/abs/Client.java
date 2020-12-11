@@ -10,8 +10,8 @@ public class Client {
 
     public static void main(String[] args) {
         AbstractFactory carFactory = new JiLiFactory();
-        Engine engine = carFactory.createEngine();
-        Chair chair = carFactory.createChair();
+        EngineFactory engine = carFactory.createEngine();
+        ChairFactory chair = carFactory.createChair();
         engine.run();
         chair.run();
     }

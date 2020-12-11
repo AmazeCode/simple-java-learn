@@ -6,12 +6,12 @@ package com.java.design.pattern.factory.abs;
 public class BydFactory implements AbstractFactory{
 
     @Override
-    public Engine createEngine() {
+    public EngineFactory createEngine() {
         return new EngineB();
     }
 
     @Override
-    public Chair createChair() {
+    public ChairFactory createChair() {
         return new ChairB();
     }
 }

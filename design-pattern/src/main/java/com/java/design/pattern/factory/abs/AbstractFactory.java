@@ -6,7 +6,7 @@ package com.java.design.pattern.factory.abs;
 public interface AbstractFactory {
 
     //创建发动机
-    Engine createEngine();
+    EngineFactory createEngine();
     //创建座椅
-    Chair createChair();
+    ChairFactory createChair();
 }
