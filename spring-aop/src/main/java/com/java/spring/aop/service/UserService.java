@@ -8,5 +8,21 @@ package com.java.spring.aop.service;
  */
 public interface UserService {
 
+    /**
+     * @description: 手动实现编程事务
+     * @params: []
+     * @return: void
+     * @author: zhangyadong
+     * @date: 2020/12/15 0015 下午 9:43
+     */
     void add();
+
+    /**
+     * @description: aop实现事务
+     * @params: []
+     * @return: void
+     * @author: zhangyadong
+     * @date: 2020/12/15 0015 下午 10:06
+     */
+    void addForAop();
 }

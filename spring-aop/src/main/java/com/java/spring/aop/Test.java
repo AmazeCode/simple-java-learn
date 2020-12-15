@@ -17,5 +17,6 @@ public class Test {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
         UserService userService = (UserService)applicationContext.getBean("userServiceImpl");
         userService.add();
+        userService.addForAop();
     }
 }
