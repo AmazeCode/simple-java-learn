@@ -1,5 +1,6 @@
 package com.java.spring.aop;
 
+import com.java.spring.aop.annotation.service.UserAnnotationService;
 import com.java.spring.aop.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,8 +16,10 @@ public class Test {
     public static void main(String[] args) {
         //读取spring配置文件
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-        UserService userService = (UserService)applicationContext.getBean("userServiceImpl");
+       /* UserService userService = (UserService)applicationContext.getBean("userServiceImpl");
         userService.add();
-        userService.addForAop();
+        userService.addForAop();*/
+        UserAnnotationService userAnnotationService = (UserAnnotationService)applicationContext.getBean("userAnnotationServiceImpl");
+        userAnnotationService.add();
     }
 }

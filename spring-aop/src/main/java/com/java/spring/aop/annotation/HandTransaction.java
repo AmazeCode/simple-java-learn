@@ -1,10 +1,9 @@
-package com.java.spring.aop.transaction;
+package com.java.spring.aop.annotation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
 
@@ -14,7 +13,7 @@ import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
  */
 @Component
 @Scope("prototype") //每个事物都是一个新的实例,不会相互影响.目的解决线程安全问题 多例子
-public class TransactionUtil {
+public class HandTransaction {
 
     //获取事务源
     @Autowired
@@ -31,17 +30,19 @@ public class TransactionUtil {
      * @date: 2020/12/15 0015 下午 9:48
      */
     public TransactionStatus begin(){
-        transactionStatus = dataSourceTransactionManager.getTransaction(new DefaultTransactionAttribute());
-        return transactionStatus;
+        System.out.println("开启事物.......");
+        return dataSourceTransactionManager.getTransaction(new DefaultTransactionAttribute());
     }
 
     //提交事务
-    public void commit(TransactionStatus transactionStatus){
+    public void commit(){
+        System.out.println("提交事物.......");
         dataSourceTransactionManager.commit(transactionStatus);
     }
 
     //回滚事务
-    public void rollback(TransactionStatus transactionStatus){
+    public void rollback(){
+        System.out.println("回滚事物.......");
         dataSourceTransactionManager.rollback(transactionStatus);
     }
 }
