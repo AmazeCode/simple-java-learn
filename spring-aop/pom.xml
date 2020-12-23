@@ -64,5 +64,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.37</version>
         </dependency>
+        <!-- Jsch 封装Util工具类实现ssh通信jar -->
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>0.1.51</version>
+        </dependency>
     </dependencies>
 </project>
