@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student1 id="001">
+        <ht>meite1</ht>
+        <gt>特特1</gt>
+    </student1>
+    <student2 id="002">
+        <ht>meite2</ht>
+        <gt>特特2</gt>
+    </student2>
+</students>

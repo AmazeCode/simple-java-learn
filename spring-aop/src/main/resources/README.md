@@ -17,4 +17,6 @@
 把每个bean与bean之间的关系交给第三方容器进行管理、关于bean的初始化
 ##### Xml注解注入Bean使用什么技术？
 技术:使用了dom4j+反射技术,可参考com.java.spring.aop.xml.XmlAnnotation验证方式
+##### Xml和Json区别
+Xml属于重量级的、占用宽带比较大;Json属于轻量级,占带宽比较小,通常用来作为数据交换
 
