@@ -12,7 +12,7 @@
         <module>java-thread</module>
         <module>design-pattern</module>
         <module>jvm</module>
-        <module>spring-aop</module>
+        <module>spring</module>
     </modules>
 
 
