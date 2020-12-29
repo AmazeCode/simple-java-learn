@@ -13,7 +13,7 @@
         <module>design-pattern</module>
         <module>jvm</module>
         <module>spring</module>
-        <module>spirngmvc</module>
+        <module>springmvc</module>
     </modules>
 
 

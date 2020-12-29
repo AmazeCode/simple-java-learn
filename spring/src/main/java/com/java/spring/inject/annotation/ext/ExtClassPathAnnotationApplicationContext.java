@@ -115,7 +115,7 @@ public class ExtClassPathAnnotationApplicationContext {
                 //获取当前类名  beanid 默认类名小写,有值时取值需扩展
                 String className = classInfo.getSimpleName();
                 //将当前类名变为小写
-                String beanId = toLowerCaseFirstOne(className);
+                String beanId = ClassUtil.toLowerCaseFirstOne(className);
                 //获取实例
                 Object newInstance = newInstance(classInfo);
                 //存放beanid
@@ -124,22 +124,6 @@ public class ExtClassPathAnnotationApplicationContext {
         }
         return beans;
     }
-
-
-    /**
-     * @description: 首字母转小写
-     * @params: [s]
-     * @return: java.lang.String
-     * @author: zhangyadong
-     * @date: 2020/12/26 14:49
-     */
-    public static String toLowerCaseFirstOne(String s){
-        if(Character.isLowerCase(s.charAt(0)))
-            return s;
-        else
-            return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
-    }
-
 
     /**
      * @description: 依赖注入注解原理

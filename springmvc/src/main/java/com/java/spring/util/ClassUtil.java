@@ -3,6 +3,8 @@ package com.java.spring.util;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -192,5 +194,34 @@ public class ClassUtil {
                 }
             }
         }
+    }
+
+    /**
+     * @description: 首字母转小写
+     * @params: [s]
+     * @return: java.lang.String
+     * @author: zhangyadong
+     * @date: 2020/12/26 14:49
+     */
+    public static String toLowerCaseFirstOne(String s){
+        if(Character.isLowerCase(s.charAt(0)))
+            return s;
+        else
+            return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+    }
+
+    /**
+     * @description: 初始化对象
+     * @params: [classInfo]
+     * @return: java.lang.Object
+     * @author: zhangyadong
+     * @date: 2020/12/29 11:47
+     */
+    public static Object newInstance(Class<?> classInfo) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        //调用参构造函数
+        Constructor<?> constructor = classInfo.getDeclaredConstructor(null);
+        //允许访问私有构造函数
+        constructor.setAccessible(true);
+        return constructor.newInstance();
     }
 }

@@ -8,7 +8,7 @@
   <servlet>
     <!-- servlet 名称 -->
     <servlet-name>dispatcher</servlet-name>
-    <servlet-class>com.java.spring.servlet.ExtDispatherServlet</servlet-class>
+    <servlet-class>com.java.spring.mvc.ExtDispatcherServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>

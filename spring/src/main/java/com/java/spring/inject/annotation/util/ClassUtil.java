@@ -3,6 +3,7 @@ package com.java.spring.inject.annotation.util;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -192,5 +193,19 @@ public class ClassUtil {
                 }
             }
         }
+    }
+
+    /**
+     * @description: 首字母转小写
+     * @params: [s]
+     * @return: java.lang.String
+     * @author: zhangyadong
+     * @date: 2020/12/26 14:49
+     */
+    public static String toLowerCaseFirstOne(String s){
+        if(Character.isLowerCase(s.charAt(0)))
+            return s;
+        else
+            return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
     }
 }
