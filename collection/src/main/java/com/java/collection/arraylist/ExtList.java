@@ -18,6 +18,15 @@ public interface ExtList<E> {
     public void add (E e);
 
     /**
+     * @description: 添加元素到指定位置
+     * @params: [index, object]
+     * @return: void
+     * @author: zhangyadong
+     * @date: 2021/1/4 16:48
+     */
+    public void add (int index, Object object);
+
+    /**
      * @description: 获取元素
      * @params: [index]
      * @return: E

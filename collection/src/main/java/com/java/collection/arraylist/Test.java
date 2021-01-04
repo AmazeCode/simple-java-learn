@@ -20,7 +20,10 @@ public class Test {
         extList.add("李四");
         extList.add("dsf");
         extList.add("李四");
+        //移除元素
         extList.remove("李四");
+        //插入元素到指定位置
+        extList.add(1,"王五");
         for (int i = 0; i < extList.getSize(); i++){
             System.out.println(extList.get(i));
         }

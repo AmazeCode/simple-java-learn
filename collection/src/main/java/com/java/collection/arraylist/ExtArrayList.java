@@ -107,7 +107,10 @@ public class ExtArrayList<E> implements ExtList<E> {
         E oldValue = elementData(index);
         // 计算删除元素后面的长度
         int numMoved = size - index - 1;
-        // 2.删除原理分析 ：使用arraycopy往前移动数据,将最后一个变为空
+        /*
+            src--这是源数组 srcPos--这是源数组中的起始复制位置 dest--这是目标数组 destPos--这是目标数据中的起始覆盖位置  length--这是一个要复制的数组元素的数目
+         */
+        // 2.删除原理分析：使用arraycopy往前移动数据,将最后一个变为空
         if (numMoved > 0)
             System.arraycopy(elementData, index+1, elementData, index, numMoved);
         elementData[--size] = null;// 将最后一元素变为空
