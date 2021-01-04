@@ -65,12 +65,23 @@ public class ExtArrayList<E> implements ExtList<E> {
         size++;
     }
 
+    @Override
+    public E set(int index, Object object) {
+        //校验
+        rangeCheckForAdd(index);
+
+        E oldValue = elementData(index);
+        elementData[index] = object;
+
+        return oldValue;
+    }
+
     /**
      * 校验添加数组下表越界
      */
     public void rangeCheckForAdd(int index) {
         if (index > size || index < 0)
-            throw new IndexOutOfBoundsException("添加元素数组下标越界了！");
+            throw new IndexOutOfBoundsException("数组下标越界了！>>"+index);
     }
 
     // int minCapacity 最小为当前size+1  （扩容算法和jdk相同）

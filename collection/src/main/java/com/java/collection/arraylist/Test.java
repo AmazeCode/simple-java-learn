@@ -24,6 +24,7 @@ public class Test {
         extList.remove("李四");
         //插入元素到指定位置
         extList.add(1,"王五");
+        extList.set(1,"小李");
         for (int i = 0; i < extList.getSize(); i++){
             System.out.println(extList.get(i));
         }

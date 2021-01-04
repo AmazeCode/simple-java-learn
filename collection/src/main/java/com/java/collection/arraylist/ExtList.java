@@ -25,6 +25,15 @@ public interface ExtList<E> {
      * @date: 2021/1/4 16:48
      */
     public void add (int index, Object object);
+    
+    /**
+     * @description: 更新指定位置元素
+     * @params: [index, object]
+     * @return: void
+     * @author: zhangyadong
+     * @date: 2021/1/4 17:04
+     */
+    public E set (int index, Object object);
 
     /**
      * @description: 获取元素
