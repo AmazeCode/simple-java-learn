@@ -17,12 +17,12 @@ public class ExtLinkedList<E> {
     // 最后个元素(尾结点,为了添加开始)
     private Node last;
 
-    // add
+    // add 方法
     public void add() {
 
     }
 
-    // 链表节点存储元素
+    // 双向链表节点存储元素
     private class Node{
         // 存放元素的值
         Object object;
