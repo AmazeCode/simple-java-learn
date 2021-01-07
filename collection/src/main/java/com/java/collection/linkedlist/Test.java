@@ -19,6 +19,10 @@ public class Test {
         transient int size = 0; //实际存储大小
         transient Node<E> first; //第一个元素
         transient Node<E> last; //最后一个元素
+        // first和last的关系
+        1、如果只有一个节点node1：first和last都指向node1
+        2、如果有两个节点node1和node2：first指向node1,last指向node2
+        3、如果有三个节点node1、node2、node3：first指向node1,last指向node2
         linkLast(e) //目的需要在last后面添加元素
      */
     public static void main(String[] args) {
