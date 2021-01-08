@@ -8,6 +8,23 @@ package com.java.collection.linkedlist;
  */
 public class ExtLinkedList<E> {
 
+    /*
+        LinkedList底层实现的方式:
+        transient 修饰的字段属性,不会被序列化,注意static修饰的静态变量,天然是不可序列化的
+        特点：
+        (1)、一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法被访问
+        (2)、transient关键字只能修饰变量,而不能修饰方法和类。注意,本地变量是不能被transient关键字修饰的。变量如果是用户自定义类变量,则该类需要实现Serializable接口。
+        (3)、一个静态变量不管是否被transient修饰,均不能被序列化(如果反序列化后类中static变量还有值,则值为当前JVM中对应static变量的值)。序列化保存的是对象状态，静态变量保存的是类状态，因此序列化并不保存静态变量。
+        transient int size = 0; //实际存储大小
+        transient Node<E> first; //第一个元素
+        transient Node<E> last; //最后一个元素
+        // first和last的关系
+        1、如果只有一个节点node1：first和last都指向node1
+        2、如果有两个节点node1和node2：first指向node1,last指向node2
+        3、如果有三个节点node1、node2、node3：first指向node1,last指向node2
+        linkLast(e) //目的需要在last后面添加元素
+     */
+
     // 链表实际存储元素
     private int size;
 
@@ -24,7 +41,7 @@ public class ExtLinkedList<E> {
      * @author: zhangyadong
      * @date: 2021/1/7 0007 下午 8:12
      */
-    public synchronized void add(E e) {
+    public void add(E e) {
         linkLast(e);
     }
 
@@ -56,13 +73,13 @@ public class ExtLinkedList<E> {
     }
 
     /**
-     * @description: 使用下标添加节点(线程不安全需要加同步)
+     * @description: 使用下标添加节点(线程不安全,size是公用参数)
      * @params: [index, e]
      * @return: void
      * @author: zhangyadong
      * @date: 2021/1/7 0007 下午 10:37
      */
-    public synchronized void add(int index, E e) {
+    public void add(int index, E e) {
         // 下标验证
         checkElementIndex(index);
 
@@ -164,7 +181,7 @@ public class ExtLinkedList<E> {
             } else {
                 //将node1的下一个节点变为node3
                 oldPrevNode.next = oldNextNode;
-                oldNode.prev = null;
+                oldNode.prev = null;//让垃圾回收机制进行回收
             }
 
             if (oldNextNode == null) {
@@ -173,7 +190,7 @@ public class ExtLinkedList<E> {
             } else {
                 //将node3的上一个节点变为node1
                 oldNextNode.prev = oldPrevNode;
-                oldNode.next = null;
+                oldNode.next = null;//让垃圾回收机制进行回收
             }
             oldNode.object = null;//让垃圾回收机制进行回收
             size--;
@@ -215,10 +232,9 @@ public class ExtLinkedList<E> {
         extLinkedList.add("a");
         extLinkedList.add("b");
         extLinkedList.add("c");
-        extLinkedList.add("e");
+        extLinkedList.add(0,"e");//在头部插入圆度
         System.out.println("删除之前："+extLinkedList.get(2));
         extLinkedList.remove(2);
         System.out.println("删除之后："+extLinkedList.get(2));
-
     }
 }
