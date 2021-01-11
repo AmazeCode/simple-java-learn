@@ -45,8 +45,20 @@ Vector 是线程安全的,但是性能比ArrayList要低，Vector 每次扩容�
 ##### ArrayList和LinkedList区别(基本API)？
 面试答案：首先LinkedList底层删除或者新增的时候,不会移动数据元素,只会维护内部节点的关系;       
 ArrayList删除的时候,将当前元素后面的元素往前移动,这时候会用到数据扩容技术,这种方式效率非常低。
-##### LinkedList查询慢的原因,ArrayList查询快的原因？
+##### LinkedList查询慢的原因,ArrayList查询快的原因?
 答案:是因为链表没有下标,需要一个一个遍历查询(从first开始查询);ArrayList可以直接使用下标进行查询,很少有索引
+##### HashMap 1.7数组+链表(单链表:只保存下一个节点next),HashMap底层为什么不采用双链表？
+答案:HashMap使用不到上一个节点    
+数据存储步骤：   
+1、先定义数组(数组类型=Node链表)        
+2、链表存放那些数据呢？-- hashCode相同，类型为Entry(包含key、value、next)   
+3、底层Node<Entry>,hashMap使用取模算法
+##### (Jdk1.7)Hash碰撞怎么解决?
+答案:以链表方式存储,hash相同,entry的key值相同,直接覆盖,如果key值不同直接添加新entry
+##### HashMap为什么要扩容?
+答案:因为链表越长,查询效率越低,节点越多会影响查询效率,链表查询低,最好使用降低hash碰撞问题(减少index冲突问题),如果直接采用hash取模获取到index(没有hash冲突问题查询速度比较快)
+##### 扩容数组之后,有什么影响?
+hashCode 相同,但是扩容数组之后长度发生变化。需要重新取模计算index
 
 
 
