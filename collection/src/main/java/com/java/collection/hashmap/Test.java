@@ -20,18 +20,36 @@ public class Test {
 
         // 基于什么原则 后进先出 非公平锁与公平锁
         ExtHashMap map = new ExtHashMap<String,String>();
+        System.out.println("扩容前：---------------------");
         map.put("1号","aaaa");
         map.put("2号","bbbb");
         map.put("3号","cccc");
         map.put("4号","dddd");
         map.put("5号","eeee");
         map.put("6号","ffff");
-        map.put("7号","jjjj");
-        map.put("14号","hhhh");
-        map.put("3号","kkef");
+        map.put("7号","gggg");
+        map.put("8号","hhhh");
+        map.put("10号","iiii");
+        map.put("11号","jjjj");
+        map.put("12号","kkkk");
+        map.put("13号","llll");
+        map.put("14号","mmmm");
+        map.put("15号","mmmm");
         map.print();
-        System.out.println(map.get("7号"));
-
+        System.out.println("扩容后:---------------------");
+        map.put("16号","aaaa");
+        map.put("17号","bbbb");
+        map.put("18号","cccc");
+        map.put("19号","dddd");
+        map.put("20号","eeee");
+        map.put("21号","ffff");
+        map.put("22号","gggg");
+        map.put("23号","hhhh");
+        map.put("24号","iiii");
+        map.put("25号","jjjj");
+        map.put("26号","kkkk");
+        map.put("27号","llll");
+        map.put("28 号","mmmm");
 
         /*
             添加14号之前

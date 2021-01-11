@@ -17,8 +17,7 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
     // 3.负载因子,默认0.75,扩容的时候才会用到(负载因子越小hash冲突机率越低)
     float DEFAULT_LOAD_FACTOR = 0.75f;
     // 4.table默认初始大小16
-    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
-
+    static int DEFAULT_INITIAL_CAPACITY = 1 << 4;
 
     @Override
     public V put(K key, V value) {
@@ -30,9 +29,9 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
         // 2. hashMap 扩容机制 为什么要扩容?扩容数组之后,有什么影响? hashMap中是从什么时候开始扩容的?
         // 实际存储大小 = 负载因子 * 初始容量DEFAULT_LOAD_FACTOR0.75*DEFAULT_INITIAL_CAPACITY16=12
         // 如果size>12的时候就要开始扩容,扩容大小是之前两倍
-        if (size > (DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY)) {
+        if (size >= (DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY)) {
             //需要开始对table进行扩容
-
+            resize();
         }
 
         // 3. 计算hash值指定下标位置
@@ -61,7 +60,6 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
                 }
                 newNode = newNode.next;
             }
-
         }
         table[index] = node;
         return null;
@@ -93,6 +91,9 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
             }
         }
         // 3.将newTable赋值给老的table
+        table = newTable;
+        DEFAULT_INITIAL_CAPACITY = newTable.length;
+        newTable = null;// 赋值为null--为了垃圾回收机制能够回收
     }
 
     // 测试方法，打印所有的链表
