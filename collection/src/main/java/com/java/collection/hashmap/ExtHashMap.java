@@ -29,7 +29,7 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
         // 2. hashMap 扩容机制 为什么要扩容?扩容数组之后,有什么影响? hashMap中是从什么时候开始扩容的?
         // 实际存储大小 = 负载因子 * 初始容量DEFAULT_LOAD_FACTOR0.75*DEFAULT_INITIAL_CAPACITY16=12
         // 如果size>12的时候就要开始扩容,扩容大小是之前两倍
-        if (size >= (DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY)) {
+        if (size > (DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY)) {
             //需要开始对table进行扩容
             resize();
         }
@@ -118,7 +118,7 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
     //获取hash下标
     private int getIndex(K key,int length){
         int hashCode = key.hashCode();
-        System.out.println("k:" + key + ",hashCode=" + hashCode);
+        //System.out.println("k:" + key + ",hashCode=" + hashCode);
         int index = hashCode % length;
         return index;
     }
