@@ -14,6 +14,11 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
     Node<K,V>[] table = null;
     // 2.实际用到table 存储容量大小
     int size;
+
+    /*
+        负载因子设置为0.75原因:提高空间利用率和 减少查询成本的折中，主要是泊松分布，0.75的话碰撞最小
+        也就是说用0.75作为加载因子，每个碰撞位置的链表长度超过８个是几乎不可能的
+     */
     // 3.负载因子,默认0.75,扩容的时候才会用到(负载因子越小hash冲突机率越低)
     float DEFAULT_LOAD_FACTOR = 0.75f;
     // 4.table默认初始大小16
@@ -47,10 +52,9 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
                 // 已经发生hash冲突 (单向链表) -- index冲突
                 if (newNode.getKey().equals(key) || newNode.getKey() == key) {
                     // hashCode相同,而且equals相等情况,说明是同一个对象 进行修改操作
-                    //node.value = value;
                     return newNode.setValue(value);
                 } else {
-                    // 说明遍历到最后一个node,添加node
+                    // 遍历到最后一个node,添加node
                     if (newNode.next == null) {
                         // hashCode取模的余数相同index相同,对象不同
                         // 继续添加 (直接添加冲突node在最前面,不是在最后面)
@@ -82,7 +86,7 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
                 int newIndex = getIndex(oldKey, newTable.length);
                 // 存放在之前的table 原来的node next
                 Node<K,V> oldNext = oldNode.next;
-                // 如果index下标在newTable发生相同index时候,以链表进行存储 //原来的node的下一个是最新的(原来的node)
+                // 如果newIndex下标在newTable中有值的时候(发生了hash冲突即已经有值存入到链表中),以链表进行存储 //原来的node的下一个是最新的(与扩容前链表存储的顺序相反,原来在第一个存储到了最后一个)
                 oldNode.next = newTable[newIndex];
                 // 将之前的node赋值给 newTable[newIndex]
                 newTable[newIndex] = oldNode;
@@ -119,7 +123,7 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
     private int getIndex(K key,int length){
         int hashCode = key.hashCode();
         //System.out.println("k:" + key + ",hashCode=" + hashCode);
-        int index = hashCode % length;
+        int index = hashCode % length; //取模算法
         return index;
     }
 
