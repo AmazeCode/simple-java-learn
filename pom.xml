@@ -17,5 +17,6 @@
         <module>db-pool</module>
         <module>mybatis</module>
         <module>collection</module>
+        <module>springboot-01</module>
     </modules>
 </project>
