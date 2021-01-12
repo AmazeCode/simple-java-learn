@@ -21,7 +21,6 @@ public class Test {
 
         // 基于什么原则 后进先出 非公平锁与公平锁
         ExtHashMap map = new ExtHashMap<String,String>();
-        //HashMap map = new HashMap<String,String>();
         System.out.println("扩容前：---------------------");
         map.put("1号", "1号");
         map.put("2号","2号");
@@ -37,11 +36,11 @@ public class Test {
         map.put("28号","28号");
         map.put("66号","66号");
         map.put("30号","30号");
-        //map.print();
+        map.print();
         System.out.println("扩容后:---------------------");
         map.put("31号","31号");
         map.put("66号", "689号");
-        //map.print();
+        map.print();
         map.get("66号");
         /*
             扩容前：---------------------

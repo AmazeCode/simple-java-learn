@@ -153,7 +153,7 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     // 定义节点
