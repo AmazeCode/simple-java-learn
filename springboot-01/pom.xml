@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.java.springboot</groupId>
+    <artifactId>springboot-01</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>springboot-01</name>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <!--
+        1.创建一个maven工程,选择jar类型项目
+        2.引入SpringBoot Maven依赖
+        Maven parent 目的,聚合工程、继承关系
+        Spring parent 目的：统一整合第三方框架依赖信息（SpringBoot 支持依赖,不需要写版本号）
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.0.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <!--
+            SpringBoot 整合web组件 整合SpringMVC 就会把传统方式的SpringMvc依赖的jar全部下载下来；
+            引入spring-boot-starter-web,帮你整合好所有相关的依赖jar包
+            原理：maven依赖传递 在spring-boot-starter-parent中整合好相关jar包依赖信息
+         -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
