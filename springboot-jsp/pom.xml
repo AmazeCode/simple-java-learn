@@ -3,13 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.java.springboot</groupId>
-    <artifactId>springboot-01</artifactId>
+    <artifactId>springboot-jsp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-01</name>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <packaging>war</packaging>
+    <name>springboot-jsp</name>
+    <description>Demo project for Spring Boot</description>
 
     <!--
         1.创建一个maven工程,选择jar类型项目
@@ -23,12 +21,12 @@
         <version>2.0.0.RELEASE</version>
     </parent>
 
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
     <dependencies>
-        <!--
-            SpringBoot 整合web组件 整合SpringMVC 就会把传统方式的SpringMvc依赖的jar全部下载下来；
-            引入spring-boot-starter-web,帮你整合好所有相关的依赖jar包
-            原理：maven依赖传递 在spring-boot-starter-parent中整合好相关jar包依赖信息
-         -->
+        <!-- SpringBoot Web 核心组件 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -36,13 +34,13 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
 
-        <!-- 整合Freemarker -->
+        <!--  SpringBoot 外部tomcat支持(整合jsp必须要引入的jar否则访问不了) -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
 
         <dependency>
@@ -50,7 +48,6 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -69,5 +66,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
