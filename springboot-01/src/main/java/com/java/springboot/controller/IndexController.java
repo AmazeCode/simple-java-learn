@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Description: 第一个SpringBoot方法
+ * @Description: 第一个SpringBoot方法,第一个Controller
  * @Author: zhangyadong
  * @Date: 2021/1/12 0012 下午 10:33
  * @Version: v1.0
@@ -23,7 +23,7 @@ public class IndexController {
     public String index(){
         return "index";
     }
-    // 如何启动? 使用main启动
+    // 如何启动? 第一种启动方式:使用main启动
     // @EnableAutoConfiguration 作用开启自动装配
     public static void main(String[] args) {
         // 告诉SpringBoot 程序入口
