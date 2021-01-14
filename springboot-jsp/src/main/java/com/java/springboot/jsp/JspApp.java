@@ -11,7 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class JspApp {
-
+    /*
+        注意：SpringBoot整合jsp,使用IDEA启动项目时,访问会找不到jsp页面,推荐使用maven方式启动,或者使用外置tomcat启动方式
+     */
     public static void main(String[] args) {
         SpringApplication.run(JspApp.class,args);
     }

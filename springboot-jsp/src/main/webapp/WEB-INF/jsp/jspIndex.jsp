@@ -1,10 +1,23 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>Title</title>
+    <title>Springboot 整合JSP测试</title>
 </head>
 <body>
-<h1>这是我们springboot2.0整合JSP</h1>
+<table border="1" align="center" width="50%">
+    <tr>
+        <th>ID</th>
+        <th>名字</th>
+        <th>地址</th>
+    </tr>
+    <c:forEach var="user" items="${userList}">
+        <tr>
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.address}</td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>

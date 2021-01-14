@@ -18,5 +18,6 @@
         <module>mybatis</module>
         <module>collection</module>
         <module>springboot-01</module>
+        <module>springboot-jsp</module>
     </modules>
 </project>
