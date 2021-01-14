@@ -1,6 +1,8 @@
 package com.java.springboot.exception.controller;
 
 import com.java.springboot.exception.exception.MyException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class ErrorController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ErrorController.class);
 
     /*
         如果每个方法都可能发生异常,每个方法上都加上try,这样做肯定不好?怎么做?
@@ -46,6 +50,7 @@ public class ErrorController {
      */
     @RequestMapping("/indexThymeleaf")
     public String indexThymeleaf() throws MyException {
+        logger.info("indexThymeleaf 执行了");
         return "/page/indexThymeleaf";
     }
 
