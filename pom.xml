@@ -20,5 +20,6 @@
         <module>springboot-01</module>
         <module>springboot-jsp</module>
         <module>springboot-exception</module>
+        <module>springboot-mybatis</module>
     </modules>
 </project>
