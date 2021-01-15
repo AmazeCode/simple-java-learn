@@ -21,5 +21,6 @@
         <module>springboot-jsp</module>
         <module>springboot-exception</module>
         <module>springboot-mybatis</module>
+        <module>springboot-multiple-datasource</module>
     </modules>
 </project>
