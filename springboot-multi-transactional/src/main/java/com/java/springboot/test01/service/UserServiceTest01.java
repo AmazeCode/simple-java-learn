@@ -24,26 +24,6 @@ public class UserServiceTest01 {
     private UserMapperTest02 userMapperTest02;
 
     /*
-        能否自动实现多数据源注解@MultipleDataSource(ref = "dataSource01“)实现指定书屋管理器？
-     */
-
-    /**
-     * @description: 添加用户
-     * @params: [name, age]
-     * @return: int
-     * @author: zhangyadong
-     * @date: 2021/1/15 10:58
-     */
-    @Transactional(transactionManager = "test01TransactionManager") //需要指定事务管理器
-    public int insertUser(String name, Integer age) {
-        int insertResult = userMapperTest01.insert(name, age);
-        log.info("#########insertResult:{}#########",insertResult);
-        int i = 1/age;
-        return insertResult;
-    }
-
-
-    /*
         这里不能指定具体的事务管理器,原因在于事务已经交给了Atomikos管理
      */
     @Transactional

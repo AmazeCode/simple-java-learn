@@ -18,19 +18,6 @@ public class MybatisMultipleDatasourceController {
     @Autowired
     private UserServiceTest01 userServiceTest01;
 
-    @Autowired
-    private UserServiceTest02 userServiceTest02;
-
-    @RequestMapping("/insertUserTest01")
-    public Integer insertUserTest01(String name, Integer age) {
-        return userServiceTest01.insertUser(name,age);
-    }
-
-    @RequestMapping("/insertUserTest02")
-    public Integer insertUserTest02(String name, Integer age) {
-        return userServiceTest02.insertUser(name,age);
-    }
-
     @RequestMapping("/insertUserTest01AndTest02")
     public Integer insertUserTest01AndTest02(String name, Integer age) {
         return userServiceTest01.insertUserTestO1AndTest02(name,age);
