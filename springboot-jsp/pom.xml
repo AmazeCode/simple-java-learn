@@ -35,6 +35,8 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
+            <!-- 打包时不打包tomcat -->
+            <scope>provided</scope>
         </dependency>
 
         <!--  SpringBoot 外部tomcat支持(整合jsp必须要引入的jar否则访问不了) -->
@@ -49,6 +51,7 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!-- jstl -->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
@@ -65,16 +68,30 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                    <!--
+                        指定主函数入口(如果不指定的话,运行时会报找不到出程序入口)
+                        这里使用maimClass也是可以的
+                    -->
+                    <mainClass>com.java.springboot.jsp.JspApp</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
