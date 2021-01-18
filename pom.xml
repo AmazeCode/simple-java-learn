@@ -22,6 +22,7 @@
         <module>springboot-exception</module>
         <module>springboot-mybatis</module>
         <module>springboot-multiple-datasource</module>
+        <module>springboot-multi-transactional</module>
         <module>springboot-jdbc</module>
     </modules>
 </project>
