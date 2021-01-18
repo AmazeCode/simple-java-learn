@@ -25,5 +25,6 @@
         <module>springboot-multi-transactional</module>
         <module>springboot-jdbc</module>
         <module>springboot-hot-deploy</module>
+        <module>springboot-tuning</module>
     </modules>
 </project>
