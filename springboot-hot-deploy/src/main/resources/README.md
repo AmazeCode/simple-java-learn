@@ -8,11 +8,6 @@
 热部署建议用在本地开发,为了本地测试能够提高效率   
 热部署应用场景：本地开发,提高运行效率,不需要重启服务器      
 ##### 热部署缺点
-项目比较大的时候,会非常卡,比较占内存
-##### SpringBoot性能调优
-1、JVM参数调优     
-2、扫包优化:是在启动优化@SpringBootApplication等同于@ComponentScan(basePackages = {"com.java.springboot"})+@Configuration,扫包的核心是扫同级包递归遍历包下子类，如果项目特别大的时候,会扫到无用包，会影响到项目启动时间      
-3、默认Tomcat容器修改为Undertow     
-4、tomcat参数调优      
+项目比较大的时候,会非常卡,比较占内存    
 
 
