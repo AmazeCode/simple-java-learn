@@ -24,5 +24,6 @@
         <module>springboot-multiple-datasource</module>
         <module>springboot-multi-transactional</module>
         <module>springboot-jdbc</module>
+        <module>springboot-hot-deploy</module>
     </modules>
 </project>
