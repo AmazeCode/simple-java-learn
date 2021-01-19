@@ -11,7 +11,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: localhost:3306/test01
     username: root
-    password: roots
+    password: root
   profiles:
     active: prod
 

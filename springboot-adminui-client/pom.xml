@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.java.springboot.adminui</groupId>
-    <artifactId>springboot-adminui</artifactId>
+    <groupId>com.java.springboot.adminui.client</groupId>
+    <artifactId>springboot-adminui-client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-adminui</name>
+    <name>springboot-adminui-client</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -19,22 +19,11 @@
     </parent>
 
     <dependencies>
-
+        <!-- admin 客户端jar -->
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>2.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-
-        <!-- SpringBoot Actuator对外暴露应用的监控信息,jolokia提供使用HTTP 接口获取JSON格式的数据 -->
-        <dependency>
-            <groupId>org.jolokia</groupId>
-            <artifactId>jolokia-core</artifactId>
         </dependency>
 
         <!-- Actuator 监控(没有管理页面) -->
@@ -43,11 +32,22 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- 将原来的版本1.1.1修改为1.1 -->
+        <!-- SpringBoot Actuator对外暴露应用的监控信息,jolokia提供使用HTTP 接口获取JSON格式的数据 -->
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+        </dependency>
+
+        <!-- 将原来的版本1.1.1强制改为1.1(1.1.1版本不支持下载jar) -->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>

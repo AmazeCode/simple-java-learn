@@ -26,5 +26,8 @@
         <module>springboot-jdbc</module>
         <module>springboot-hot-deploy</module>
         <module>springboot-tuning</module>
+        <module>springboot-actuator</module>
+        <module>springboot-adminui-sever</module>
+        <module>springboot-adminui-client</module>
     </modules>
 </project>
