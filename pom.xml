@@ -29,5 +29,6 @@
         <module>springboot-actuator</module>
         <module>springboot-adminui-sever</module>
         <module>springboot-adminui-client</module>
+        <module>springboot-mybatis-pagehelper</module>
     </modules>
 </project>
