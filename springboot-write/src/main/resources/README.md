@@ -15,8 +15,12 @@ SpringCloud底层依赖于SpringBoot实现微服务接口(SpringBoot web组件�
     通过web.xml,配置启动                         
 3、内置Http服务器          
     Java语言创建Tomcat容器(先执行),然后再执行class文件。
-    
 ##### SpringBoot内置Tomcat
 SpringBoot2.0之后Tomcat版本是8.5以上的
+
+##### 手写SpringBoot步骤
+1、手写SpringBoot注解启动方式SpringMVC      
+    1.1、SpringMVC 无配置文件 采用注解方式启动步骤：    
+        1.1.1、加载Spring容器、加载dispatcherServlet
 
 
