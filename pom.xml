@@ -30,5 +30,7 @@
         <module>springboot-adminui-server</module>
         <module>springboot-adminui-client</module>
         <module>springboot-mybatis-pagehelper</module>
+        <module>java-create-tomcat</module>
+        <module>springboot-write</module>
     </modules>
 </project>

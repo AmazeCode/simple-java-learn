@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+  <!-- 自定义 IndexServlet 配置 -->
+  <servlet>
+    <!-- servlet 名称 -->
+    <servlet-name>indexServlet</servlet-name>
+    <servlet-class>com.java.tomcat.servlet.IndexServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>indexServlet</servlet-name>
+    <!-- 拦截所有/index 的请求地址，交给IndexServlet处理,性能最好 -->
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+</web-app>
