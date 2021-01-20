@@ -7,6 +7,6 @@
     <title>Insert title here</title>
 </head>
 <body>
-    <h1>第一次手些springmvc....... </h1>
+    <h1>手动创建Tomcat....... </h1>
 </body>
 </html>
