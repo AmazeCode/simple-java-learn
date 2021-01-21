@@ -44,25 +44,25 @@ public class MyInvocationHandlerMybatis implements InvocationHandler {
         }
         // 2.查询思路
         // method.getDeclaredAnnotation(ExtSelect.class);
-        // 1.判断方法上是否存在注解
+        // 1.判断方法上是否存在ExtSelect注解
         ExtSelect extSelect = method.getDeclaredAnnotation(ExtSelect.class);
         if (extSelect != null) {
             // 2.获取注解上查询的sql语句
             String selectSql = extSelect.value();
             // 3.获取方法上的参数,绑定在一起
             ConcurrentHashMap<String, Object> paramsMap = paramsMap(proxy, method, args);
-            // 4.替换成？传递方式
+            // 4.获取Where后面的参数条件
             List<String> sqlSelectParameter = SqlUtils.sqlSelectParameter(selectSql);
-            // 5.传递参数
+            // 5.将参数对应的value值按照顺序存放到List
             List<Object> sqlParams = new ArrayList<>();
             for (String paramName : sqlSelectParameter) {
                 Object paramValue = paramsMap.get(paramName);
                 sqlParams.add(paramValue);
             }
-            // 6.将sql语句替换成？
+            // 6.将sql语句参数替换成?
             String newSql = SqlUtils.paramQuestion(selectSql, sqlSelectParameter);
             // 5.调用jdbc代码底层执行sql语句
-            // 查询返回对象思路: 1.使用反射机制获取方法类型 2.判断是否有结果集,如果有结果集，再进行初始化 3.使用反色机制，给对象赋值
+            // 查询返回对象思路: 1.使用反射机制获取方法类型 2.判断是否有结果集,如果有结果集,再进行初始化 3.使用反射机制，给对象赋值
             ResultSet res = JdbcUtils.query(newSql, sqlParams.toArray());
             // 6.使用反射机制实例对象 ### 获取方法返回的类型,进行实例化
             // 判断是否存在值
@@ -73,14 +73,19 @@ public class MyInvocationHandlerMybatis implements InvocationHandler {
             res.previous();
             // 使用反射机制获取方法的类型
             Class<?> returnType = method.getReturnType();
+            // 对象初始化
             Object object = returnType.newInstance();
             while (res.next()) {
-                // 获取当前所有属性
+                // 获取当前对象所有属性
                 Field[] declaredFields = returnType.getDeclaredFields();
                 for (Field field : declaredFields) {
+                    // 获取属性名称
                     String fieldName = field.getName();
+                    // 获取返回属性值
                     Object fieldValue = res.getObject(fieldName);
+                    // 允许访问私有成员变量
                     field.setAccessible(true);
+                    // 映射属性名称和属性值
                     field.set(object,fieldValue);
                 }
                 /*for (String parameterName : sqlSelectParameter) {
@@ -112,12 +117,14 @@ public class MyInvocationHandlerMybatis implements InvocationHandler {
         System.out.println(insertSql);
         //3. 获取方法参数和SQL参数进行匹配
         ConcurrentHashMap<String, Object> paramsMap = paramsMap(proxy, method, args);
-        // 存放sql执行的参数----参数绑定过程
-        String[] sqlInsertParameters = SqlUtils.sqlInsertParameter(insertSql);
-        List<Object> sqlParams = sqlParam(sqlInsertParameters,paramsMap);
-        //4. 替换参数为”？“
+        // 参数绑定过程
+        String[] sqlInsertParameters = SqlUtils.sqlInsertParameter(insertSql);// 获取sql中的参数数组
+        List<Object> sqlParams = sqlParam(sqlInsertParameters,paramsMap);// 将传递的参数值存放到List
+
+        //4. 替换参数为"?"
         String newSql = SqlUtils.paramQuestion(insertSql, sqlInsertParameters);
         System.out.println(newSql);
+
         //5. 调用jdbc底层代码执行语句
         return JdbcUtils.insert(newSql, sqlParams);
     }
@@ -136,10 +143,12 @@ public class MyInvocationHandlerMybatis implements InvocationHandler {
         Parameter[] parameters = method.getParameters();
         for (int i = 0; i < parameters.length; i++) {
             Parameter parameter = parameters[i];
-            // 获取
+            // 获取ExtParam注解
             ExtParam extParam = parameter.getDeclaredAnnotation(ExtParam.class);
             if (extParam != null) {
+                // 注解名称
                 String paramName = extParam.value();
+                // 注解名称对应的值
                 Object paramValue = args[i];
                 System.out.println(paramName + "," + paramValue);
                 paramsMap.put(paramName, paramValue);
@@ -149,7 +158,7 @@ public class MyInvocationHandlerMybatis implements InvocationHandler {
     }
 
     /**
-     * @description: 存放sql执行的参数----参数绑定过程
+     * @description: 存放sql执行的参数值----参数绑定过程
      * @params: [insertSql, paramsMap]
      * @return: java.util.List<java.lang.Object>
      * @author: zhangyadong
