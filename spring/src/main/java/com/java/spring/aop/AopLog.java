@@ -5,7 +5,7 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
- * @Description: Aop切面类
+ * @Description: Aop各种通知类型的基本使用
  * @Author: zhangyadong
  * @Date: 2020/12/14 0014 下午 9:09
  * @Version: v1.0

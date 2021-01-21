@@ -13,6 +13,6 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!-- xml注入bean -->
+    <!-- xml 依赖注入 Bean -->
     <bean id="userBean" class="com.java.spring.xml.UserBean"></bean>
 </beans>

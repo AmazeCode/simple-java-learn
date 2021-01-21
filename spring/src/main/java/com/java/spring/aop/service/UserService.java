@@ -25,4 +25,13 @@ public interface UserService {
      * @date: 2020/12/15 0015 下午 10:06
      */
     void addForAop();
+
+    /**
+     * @description: 自定义事物注解验证
+     * @params: []
+     * @return: void
+     * @author: zhangyadong
+     * @date: 2021/1/21 15:13
+     */
+    void addForExtTransaction();
 }

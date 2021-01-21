@@ -1,7 +1,7 @@
-package com.java.spring.inject.annotation.service;
+package com.java.spring.ioc.annotation.service;
 
 /**
- * @Description:
+ * @Description: Service(验证ExtService注解)
  * @Author: zhangyadong
  * @Date: 2020/12/26 16:10
  * @Version: v1.0

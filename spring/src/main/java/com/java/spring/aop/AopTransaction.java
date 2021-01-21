@@ -1,6 +1,6 @@
 package com.java.spring.aop;
 
-import com.java.spring.transaction.TransactionUtil;
+import com.java.spring.aop.util.TransactionUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
@@ -11,7 +11,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 /**
- * 切面类  基于手动事务封装
+ * 切面类  基于手动事务封装(使用切面去手动提交事物)
  */
 @Component
 @Aspect

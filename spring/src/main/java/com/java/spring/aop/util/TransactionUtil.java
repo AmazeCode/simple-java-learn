@@ -1,4 +1,4 @@
-package com.java.spring.transaction;
+package com.java.spring.aop.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

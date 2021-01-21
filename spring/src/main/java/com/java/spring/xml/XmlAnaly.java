@@ -12,18 +12,25 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @Description: Xml解析
+ * @Description: Xml解析实际
  * @Author: zhangyadong
  * @Date: 2020/12/24 0024 下午 9:53
  * @Version: v1.0
  */
 public class XmlAnaly {
 
+    /**
+     * @description: Xml解析测试
+     * @params: [args]
+     * @return: void
+     * @author: zhangyadong
+     * @date: 2021/1/21 11:31
+     */
     public static void main(String[] args) throws Exception{
-        new XmlAnaly().xmlAnaly();
+        new XmlAnaly().xmlAnalyse();
     }
 
-    public void xmlAnaly() throws DocumentException {
+    public void xmlAnalyse() throws DocumentException {
         SAXReader saxReader = new SAXReader();
         //读取xml文件
         Document document = saxReader.read(getResourceAsStream("student.xml"));

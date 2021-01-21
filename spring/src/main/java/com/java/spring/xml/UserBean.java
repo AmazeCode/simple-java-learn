@@ -1,7 +1,7 @@
 package com.java.spring.xml;
 
 /**
- * @Description: 用于验证xml注入bean
+ * @Description: 用于验证xml注入Bean
  * @Author: zhangyadong
  * @Date: 2020/12/23 0023 下午 10:03
  * @Version: v1.0

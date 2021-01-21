@@ -1,4 +1,4 @@
-package com.java.spring.inject.xml;
+package com.java.spring.ioc.xml;
 
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
@@ -11,9 +11,9 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 
 /**
- *  手动实现自定义Spring容器框架,xml方式
+ *  手写Spring IoC容器框架,xml版本
  *  1.解析xml文件
- *  2.使用方法参数beanid查找配置文件中bean节点的id信息是否一致
+ *  2.使用方法参数BeanId查找配置文件中Bean节点的id信息是否一致
  *  3.获取class信息地址，使用反射机制初始化
  */
 public class ExtClassPathXmlApplicationContext {
@@ -21,10 +21,24 @@ public class ExtClassPathXmlApplicationContext {
     //xml读取路径地址
     private String xmlPath;
 
+    /**
+     * @description: 构造方法
+     * @params: [xmlPath]
+     * @return:
+     * @author: zhangyadong
+     * @date: 2021/1/21 13:55
+     */
     public ExtClassPathXmlApplicationContext(String xmlPath) {
         this.xmlPath = xmlPath;
     }
 
+    /**
+     * @description: 获取Bean
+     * @params: [beanId]
+     * @return: java.lang.Object
+     * @author: zhangyadong
+     * @date: 2021/1/21 13:54
+     */
     public Object getBean(String beanId) throws Exception {
         if(StringUtils.isBlank(beanId)){
             throw new Exception("beanId不能为空!");
@@ -44,7 +58,7 @@ public class ExtClassPathXmlApplicationContext {
     }
 
     /**
-     * @description: 使用方法参数beanid查找配置文件中bean节点的id信息是否一致.返回class地址
+     * @description: 使用方法参数BeanId查找配置文件中Bean节点的id信息是否一致.返回class地址
      * @params: [readerXml, beanId]
      * @return: java.lang.String
      * @author: zhangyadong

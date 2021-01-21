@@ -1,4 +1,4 @@
-package com.java.spring.annotation;
+package com.java.spring.aop.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,7 +11,7 @@ import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
  * 编程事务 (需要手动 begin、手动提交、手动回滚)
  * 注意：最好不要用单例的，会产生线程安全问题，用原型比较好
  */
-@Component
+@Component //注入到Spring容器
 @Scope("prototype") //每个事物都是一个新的实例,不会相互影响.目的解决线程安全问题 多例子
 public class HandTransaction {
 

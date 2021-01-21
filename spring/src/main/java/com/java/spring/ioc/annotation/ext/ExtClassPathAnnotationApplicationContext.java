@@ -1,27 +1,26 @@
-package com.java.spring.inject.annotation.ext;
+package com.java.spring.ioc.annotation.ext;
 
-import com.java.spring.inject.annotation.util.ClassUtil;
+import com.java.spring.ioc.annotation.util.ClassUtil;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @Description: 手些Iod容器注解版本
+ * @Description: 手写Spring IoC容器框架,注解版本
  * @Author: zhangyadong
  * @Date: 2020/12/26 12:24
  * @Version: v1.0
  */
 public class ExtClassPathAnnotationApplicationContext {
 
-    //扫包范围
+    // 扫包范围
     private String packageName;
 
-    //springbean 容器
+    // 定义SpringBean 容器
     private ConcurrentHashMap<String,Object> beans = null;
 
     /**
@@ -46,7 +45,7 @@ public class ExtClassPathAnnotationApplicationContext {
      * @date: 2020/12/26 17:02
      */
     private void initEntryField() throws Exception {
-        // 1.遍历所有的bean容器对象
+        // 1.遍历所有的Bean容器对象
         for (Map.Entry<String, Object> entry : beans.entrySet()) {
             // 2.判断属性上面是否有加注解
             Object bean = entry.getValue();
@@ -55,7 +54,7 @@ public class ExtClassPathAnnotationApplicationContext {
     }
 
     /**
-     * @description: 获取bean
+     * @description: 获取Bean
      * @params: [beanId]
      * @return: java.lang.Object
      * @author: zhangyadong

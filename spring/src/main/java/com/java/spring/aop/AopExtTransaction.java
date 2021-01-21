@@ -1,7 +1,7 @@
 package com.java.spring.aop;
 
-import com.java.spring.annotation.ExtTransaction;
-import com.java.spring.annotation.HandTransaction;
+import com.java.spring.annotation.ext.ExtTransaction;
+import com.java.spring.annotation.util.HandTransaction;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
@@ -14,7 +14,7 @@ import org.springframework.transaction.TransactionStatus;
 import java.lang.reflect.Method;
 
 /**
- * 自定义事物具体切面实现
+ * 手写事物注解使用Aop具体的实现
  */
 @Component //注入到spring中
 @Aspect
