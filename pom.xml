@@ -32,5 +32,6 @@
         <module>springboot-mybatis-pagehelper</module>
         <module>java-create-tomcat</module>
         <module>springboot-write</module>
+        <module>nginx</module>
     </modules>
 </project>
