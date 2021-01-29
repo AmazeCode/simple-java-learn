@@ -16,4 +16,9 @@ public class IndexController {
     public String indexActuator(){
         return "indexActuator";
     }
+
+    @RequestMapping("/")
+    public String index() {
+        return "Actuator8081";
+    }
 }

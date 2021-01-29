@@ -23,6 +23,11 @@ public class IndexController {
     public String index(){
         return "index";
     }
+
+    @RequestMapping("/")
+    public String indexPage(){
+        return "index8080";
+    }
     // 如何启动? 第一种启动方式:使用main启动
     // @EnableAutoConfiguration 作用开启自动装配
     public static void main(String[] args) {

@@ -29,17 +29,24 @@ Nginx 启动产生端口号80,内部是http服务器
 配置步骤：(原理图可参考：Nginx配置虚拟主机(基于域名区分项目).png)           
 1、配置host文件
 ```text
-127.0.0.1 bbs.amazecode.com
 127.0.0.1 www.amazecode.com
-
-127.0.0.1 8080.amazecode.com
-127.0.0.1 8081.amazecode.com
+127.0.0.1 bbs.amazecode.com
 ```
 2、配置nginx配置文件
-具体配置参考：nginx-配置虚拟主机(即根据域名跳转目录).conf     
+具体配置参考：nginx-配置虚拟主机(即根据域名跳转目录).conf  
+启动nginx后,测试方式直接访问域名
+```text
+www.amazecode.com     -- 访问的是 www目录
+bbs.amazecode.com     -- 访问的是 bbs目录
+```   
 二、基于端口号的虚拟主机配置
 假设域名相同，监听的端口号不一样,比如监听8080,8081,访问时通过域名添加端口号访问          
-具体配置参考: nginx-配置虚拟主机(即根据端口号跳转目录).conf   
+具体配置参考: nginx-配置虚拟主机(即根据端口号跳转目录).conf     
+启动nginx后,测试方式直接访问域名:端口号
+```text
+www.amazecode.com:8080     -- 访问的是 www目录
+bbs.amazecode.com:8081     -- 访问的是 bbs目录
+```   
 ##### 反向代理
 1、基于Nginx实现的反向代理(原理参考:Nginx反向代理图.png)        
 2、什么是反向代理
@@ -52,8 +59,14 @@ nginx拦截所有的请求,内部实现转发到真实服务器地址中
 ```
 演示需要配置host
 ```java
-127.0.0.1 bbs.amazecode.com
 127.0.0.1 www.amazecode.com
+127.0.0.1 bbs.amazecode.com
 ```
+本地启动两个项目,端口号分别为8080,8081,分别访问连接都是根路径/,修改好nginx反向代理配置的配置文件后,启动nginx,
+通过访问域名进行测试    
+```text
+www.amazecode.com   -- proxy_pass http://127.0.0.1:8080
+bbs.amazecode.com   -- proxy_pass http://127.0.0.1:8081
+```    
 抓包工具能不能抓取到nginx代理的节点信息？答案:抓取不到(可以使用Fiddle抓包工具测试)
 

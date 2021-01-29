@@ -9,13 +9,16 @@ management:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: localhost:3306/test01
+    url: jdbc:mysql://localhost:3306/test01
     username: root
     password: root
   profiles:
     active: prod
 
 
+
 #### /actuator/info\u63A5\u53E3\u76F8\u5F53\u4E8E\u5728\u914D\u7F6E\u6587\u4EF6\u4E2D\u914D\u7F6Einfo\u5F00\u5934\u7684\u914D\u7F6E\u4FE1\u606F(\u53EA\u80FD\u662F\u8BFB\u53D6\u81EA\u5B9A\u4E49\u7684info\u5F00\u5934\u7684\u914D\u7F6E\u4FE1\u606F)
 info:
   name: amazecode
+server:
+  port: 8081
