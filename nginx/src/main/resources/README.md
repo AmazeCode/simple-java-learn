@@ -175,11 +175,20 @@ if($http_user_agent ~ Chrome){
 }
 ```
 注意判断条件最好要写到server里面，或者写到location里面
-
-
-
-2、为什么要用负载均衡?                   
-3、负载均衡给我们带来的问题?         
-4、负载均衡算法      
+##### Nginx动态负载均衡
+Nginx 动态负载均衡实现方案
+```text
+1、Consul+Consul-template
+每次发现配置更改需要reload nginx,重启nginx(不太好)
+2、Consul+OpenResty
+实现无需reload动态负载均衡
+3、Nginx+Consul+UpSync (nginx版本要使用1.9.10版本)
+nginx-upsync-module：新浪开发的基于Nginx实现动态配置的三方模块，能拉取Consul的后端server列表,并动态更新Nginx的路由信息
+实现无需reload动态负载均衡
+Raft算法用在Consul中做集群
+原理参考:Nginx+Consul+UpSync实现动态均衡原理.png
+安装配置流程：参考Nginx+consul+upsync动态负载均衡环境搭建.png
+注意:如果分布式配置中心里面配置了Jdbc数据库连接,配置修改后还是需要进行重启服务的(要么配置成懒加载的形式或者实时加载)
+```     
 
 
