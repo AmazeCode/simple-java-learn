@@ -229,6 +229,7 @@ Nginx 动态负载均衡实现方案
 实现无需reload动态负载均衡
 3、Nginx+Consul+UpSync (nginx版本要使用1.9.10版本)
 nginx-upsync-module：新浪开发的基于Nginx实现动态配置的三方模块，能拉取Consul的后端server列表,并动态更新Nginx的路由信息
+具体搭建过程可参考博客(自己写的):https://blog.csdn.net/qq_21875331/article/details/113605598
 实现无需reload动态负载均衡
 Raft算法用在Consul中做集群
 原理参考:Nginx+Consul+UpSync实现动态均衡原理.png
