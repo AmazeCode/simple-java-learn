@@ -6,7 +6,7 @@ package com.java.design.pattern.factory.simple;
  * @Date: 2020/11/26 15:55
  * @Version: v1.0
  */
-public class Client {
+public class SimpleFactoryTest {
 
     public static void main(String[] args) {
         //Car car = new BydCar();

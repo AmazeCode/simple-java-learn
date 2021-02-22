@@ -6,7 +6,7 @@ package com.java.design.pattern.proxy.statics;
  * @Date: 2020/11/28 22:53
  * @Version: v1.0
  */
-public class ClientDemo {
+public class TestDemo {
 
     public static void main(String[] args) {
         IUserDao iUserDao = new IUserDaoImpl();

@@ -3,7 +3,7 @@ package com.java.design.pattern.prototype;
 /**
  * 原型模式验证
  */
-public class Client {
+public class Test {
 
     public static void main(String[] args) throws Exception{
         //被克隆对象

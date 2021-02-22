@@ -5,7 +5,7 @@ package com.java.design.pattern.adapter;
  * 1、对象方式（本例子是对象适配器）
  * 2、继承方式extends Cn220vInterfaceImpl
  */
-public class PowerAdapter  implements Jp110VInterface{
+public class PowerAdapter implements Jp110VInterface{
 
     private Cn220vInterface cn220vInterface;
 

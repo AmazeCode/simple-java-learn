@@ -3,14 +3,14 @@ package com.java.design.pattern.builder;
 /**
  * 构造人物：构造美国人
  */
-public class ManBuilder implements PersonBuilder{
+public class AmericanBuilder implements PersonBuilder{
 
     private Person person;
 
     /*
         构造函数
      */
-    public ManBuilder(){
+    public AmericanBuilder(){
         person = new Person();
     }
 
