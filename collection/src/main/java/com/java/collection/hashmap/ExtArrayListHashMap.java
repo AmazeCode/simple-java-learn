@@ -74,6 +74,13 @@ public class ExtArrayListHashMap<Key,Value> {
         return null;
     }
 
+    /**
+     * @description: 测试
+     * @params: [args]
+     * @return: void
+     * @author: zhangyadong
+     * @date: 2021/2/23 14:38
+     */
     public static void main(String[] args) {
         ExtArrayListHashMap hashMap = new ExtArrayListHashMap<String,String>();
         hashMap.put("a","aaa");

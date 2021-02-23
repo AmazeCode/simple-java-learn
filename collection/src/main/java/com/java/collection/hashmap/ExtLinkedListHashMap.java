@@ -33,18 +33,17 @@ public class ExtLinkedListHashMap {
             存放步骤:
             1、获取该下标元素,是否有LinkedList
          */
-        LinkedList<LinkedEntry> entryLinkedList = tables[hash];
-        if (entryLinkedList == null) {
-            // 没有hash冲突
+        LinkedList<LinkedEntry> entryLinkedList = tables[hash];//具体 hash的数组值
+        if (entryLinkedList == null) { // 不存在说明没有冲突的可能
             entryLinkedList = new LinkedList<LinkedEntry>();
             entryLinkedList.add(newEntry);
             // tables 数组
             tables[hash] = entryLinkedList;
         } else {
             for (LinkedEntry linkedEntry : entryLinkedList) {
-                // 判断entry 可以值是否相等
+                // 判断entry key值是否相等
                 if (linkedEntry.key.equals(key)) {
-                    //equals相等,hashcode一定相同 说明是同一个对象
+                    //key相等,由key获得的hashcode一定相同 说明是同一个对象
                     linkedEntry.value = value;//直接覆盖
                 } else {
                     // hashcode相等,对象值不一定相等,直接新增

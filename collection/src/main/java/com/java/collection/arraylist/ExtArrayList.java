@@ -35,6 +35,7 @@ public class ExtArrayList<E> implements ExtList<E> {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("初始容量不能小于0");
         }
+        // 初始化数组大小
         elementData = new Object[initialCapacity];
     }
 
@@ -59,6 +60,15 @@ public class ExtArrayList<E> implements ExtList<E> {
         // 1.判断实际存放的数据容量是否大于elementData,进行扩容
         ensureExplicitCapacity(size + 1);
 
+        /*
+            src：要复制的数组(源数组)
+            srcPos：复制源数组的起始位置
+            dest：目标数组
+            destPos：目标数组的下标位置
+            length：要复制的长度
+            System.arraycopy(src,srcPos,dest,destPos,length); //使用移动前提,素组的最终大小长度一定要大于
+            解释:从下标为index的位置开始复制，复制的长度为size - index(复制D、E)，从下标为index + 1的位置开始替换为D、E
+         */
         System.arraycopy(elementData, index, elementData, index + 1,
                 size - index);
         elementData[index] = object;
@@ -92,7 +102,7 @@ public class ExtArrayList<E> implements ExtList<E> {
             //新的数组容量大小 (oldCapacity >> 1)=oldCapacity/2
             int newCapacity = oldCapacity + (oldCapacity >> 1); // (2+ 2/2)=3
             // 如果初始容量为1，那么他扩容的大小为多少(答案为2,即 size+1)？ jdk源码使用下面代码实现
-            if (newCapacity - minCapacity < 0) {
+            if (newCapacity - minCapacity < 0) {// 如果规定数组大小size为1,那么第一次扩容后的大小为size+1=2,以后再扩展大小为原来的1.5倍
                 newCapacity = minCapacity; //最少保证容量和minCapacity一样
             }
             //将老数组中的值赋值到新数组中去
