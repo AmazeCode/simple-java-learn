@@ -24,6 +24,16 @@ public class ExtHashMap<K,V> implements ExtMap<K,V>{
     // 4.table默认初始大小16
     static int DEFAULT_INITIAL_CAPACITY = 1 << 4;
 
+
+    /*
+        jdk1.7和jdk1.8区别：
+        1、实现方式不同: jdk7使用数组+链表实现,jdk8使用数组+链表+红黑树
+        2、jdk7插入在头部,看addEntry的createEntry方法;jdk8插入在尾部(原因在于都要进行遍历,放在尾部能够省去位移操作,提升效率)
+        3、jdk8的右移比较简单,没有jdk7那么复杂。为什么jdk8的hash函数会变简单？jdk8中我们知道用的是链表过度到红黑树，效率会提高，所以jdk8提高查询效率的地方由红黑树去实现，没必要像jdk那样右移那么复杂。
+        4、jdk7里面addEntry方法扩容的条件size>threshold，还有一个很容易忽略的，就是null!=table[bucketIndex],这个是什么意思？意思是如果当前放进来的值的那个位置也被占用了，才进行扩容，否则还是放到那个空的位置就行了，反正不存在hash冲突
+        5、HashMap 中链表红黑树转换界限:若桶中链表元素个数大于等于8时,链表转换成树结构;若桶中链表元素个数小于等于6时,树结构还原成链表;
+     */
+
     @Override
     public V put(K key, V value) {
         // 1. 判断table 数组大小是否为空(如果为空的情况下,做初始化操作)
