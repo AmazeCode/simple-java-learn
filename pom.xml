@@ -33,5 +33,6 @@
         <module>java-create-tomcat</module>
         <module>springboot-write</module>
         <module>nginx</module>
+        <module>work-common-error</module>
     </modules>
 </project>
