@@ -63,6 +63,7 @@ public class ConcurrentHashMapController {
         ConcurrentHashMap<String,Long> concurrentHashMap = getData(ITEM_COUNT-100);
         log.info("init size:{}", concurrentHashMap.size());
         
+        // ForkJoinPool将一个任务拆分成多个小任务,并把小人物处理结果汇总到一个结果上
         ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
         // 使用线程池并发处理逻辑
         forkJoinPool.execute(() -> IntStream.rangeClosed(1,10).parallel().forEach(i -> {

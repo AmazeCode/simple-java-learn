@@ -84,10 +84,10 @@ public class ConcurrentHashMapCountController {
 
     /**
      * @description: 验证
-     * @params: []
-     * @return: java.lang.String
-     * @author: zhangyadong
-     * @date: 2021/4/18 16:44
+     * 结果：
+     * 6292536300  089%  normaluse
+     * 766471200  011%  gooduse
+     * gooduse写法性能明显优于normaluse性能
      */
     @GetMapping("good")
     public String good() throws InterruptedException {

@@ -24,6 +24,11 @@ import java.util.stream.IntStream;
 @RequestMapping("copyonwritearraylist")
 public class CopyOnWriteArrayListController {
 
+    /*
+        结论:synchronizedList写的性能高于CopyOnWriteArrayList的性能
+        6241326200  099%  Write:copyOnWriteArrayList
+        040660100  001%  Write:synchronizedList
+     */
     // 测试并发写性能
     @GetMapping("write")
     public Map testWrite() {
@@ -49,6 +54,11 @@ public class CopyOnWriteArrayListController {
         list.addAll(IntStream.rangeClosed(1, 1000000).boxed().collect(Collectors.toList()));
     }
 
+    /*
+        结论:copyOnWriteArrayList读的性能高于synchronizedList
+        023764900  005%  Read:copyOnWriteArrayList
+        414425000  095%  Read:synchronizedList
+     */
     @GetMapping("read")
     public Map testRead() {
         // 创建两个测试对象

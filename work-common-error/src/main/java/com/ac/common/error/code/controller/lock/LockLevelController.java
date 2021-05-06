@@ -37,8 +37,10 @@ public class LockLevelController {
     public int right (@RequestParam(value = "count",defaultValue = "1000000") int count) {
 
         Data.reset();
-        //多线程循环一定次数调用Data类不同实列的wrong方法
+        //多线程循环一定次数调用Data类不同实列的right方法
         IntStream.rangeClosed(1, count).parallel().forEach(i -> new Data().right());
         return Data.getCounter();
     }
+
+
 }

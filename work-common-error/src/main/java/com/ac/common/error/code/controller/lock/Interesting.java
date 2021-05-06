@@ -3,7 +3,7 @@ package com.ac.common.error.code.controller.lock;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @Description: 锁实例
+ * @Description: 锁实例:基本synchronized使用
  * @Author: zhangyadong
  * @Date: 2021/4/19 0019 下午 9:49
  * @Version: v1.0

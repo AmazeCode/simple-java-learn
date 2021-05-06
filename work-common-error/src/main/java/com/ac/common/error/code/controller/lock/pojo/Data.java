@@ -3,7 +3,7 @@ package com.ac.common.error.code.controller.lock.pojo;
 import lombok.Getter;
 
 /**
- * @Description:
+ * @Description: 锁使用实体类
  * @Author: zhangyadong
  * @Date: 2021/4/20 10:54
  * @Version: v1.0
@@ -27,7 +27,7 @@ public class Data {
     }
 
     /*
-        修改方式：同样定义一个Object类型的静态字段,在操作counter之前对这个字段加锁
+        修改方式：同样定义一个Object类型的静态字段,在操作counter之前对这个字段加锁(要锁定static的变量要使用类级别锁)
      */
     private static Object locker = new Object();
 
