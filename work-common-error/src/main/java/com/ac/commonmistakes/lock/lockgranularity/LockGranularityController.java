@@ -1,8 +1,9 @@
-package com.ac.common.error.code.controller.lock;
+package com.ac.commonmistakes.lock.lockgranularity;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,9 @@ import java.util.stream.IntStream;
  * @Version: v1.0
  */
 @Slf4j
-@RequestMapping("correctLockUse")
-public class CorrectLockUseController {
+@RequestMapping("lockgranularity")
+@RestController
+public class LockGranularityController {
 
     private List<Integer> data = new ArrayList<>();
 

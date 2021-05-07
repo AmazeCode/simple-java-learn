@@ -1,4 +1,4 @@
-package com.ac.common.error.code.controller.toolsafe;
+package com.ac.commonmistakes.concurrenttool.concurrenthashmap;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,18 +15,15 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 /**
- * 使用了线程安全的并发工具，并不代表解决了所有线程安全问题
- * JDK 1.5 后推出的 ConcurrentHashMap，是一个高性能的线程安全的哈希表容器。“线
- * 程安全”这四个字特别容易让人误解，因为 ConcurrentHashMap 只能保证提供的原子
- * 性读写操作是线程安全的,并不能保证线程池线程的安全性
+ * @Description: 使用了线程安全的并发工具，并不代表解决了所有线程安全问题
  * @Author: zhangyadong
- * @Date: 2021/4/16 14:50
+ * @Date: 2021/5/7 10:55
  * @Version: v1.0
  */
 @Slf4j
 @RestController
-@RequestMapping("concurrenthashmap")
-public class ConcurrentHashMapController {
+@RequestMapping("concurrenthashmapmisuse")
+public class ConcurrentHashMapMisuseController {
 
     // 线程个数
     private static int THREAD_COUNT = 10;
@@ -35,6 +32,8 @@ public class ConcurrentHashMapController {
 
     // 帮助方法,用来获得一个指定元素数量模拟数据的ConcurrentHashMap
     private ConcurrentHashMap<String,Long> getData(int count) {
+
+        // LongStream.rangeClosed生成1到count的数字流:比如count=3 那么生成的数字流就是1、2、3, range 则是不包含结尾生成1、2
         return LongStream.rangeClosed(1, count).boxed().collect(Collectors.toConcurrentMap(i -> UUID.randomUUID().toString(),
                 // 输入什么就输出什么
                 Function.identity(),
@@ -62,7 +61,7 @@ public class ConcurrentHashMapController {
     public String wrong() throws InterruptedException {
         ConcurrentHashMap<String,Long> concurrentHashMap = getData(ITEM_COUNT-100);
         log.info("init size:{}", concurrentHashMap.size());
-        
+
         // ForkJoinPool将一个任务拆分成多个小任务,并把小人物处理结果汇总到一个结果上
         ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
         // 使用线程池并发处理逻辑

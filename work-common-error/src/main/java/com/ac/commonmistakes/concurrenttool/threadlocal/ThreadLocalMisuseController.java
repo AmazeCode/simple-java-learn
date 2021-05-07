@@ -1,4 +1,4 @@
-package com.ac.common.error.code.controller.toolsafe;
+package com.ac.commonmistakes.concurrenttool.threadlocal;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,16 +9,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description: ThreadLocal 没有意识到线程重用导致用户信息错乱的 Bug
+ * @Description: 没有意识到线程重用导致用户信息错乱的 Bug,ThreadLocal缓存问题
  * @Author: zhangyadong
- * @Date: 2021/4/16 14:05
+ * @Date: 2021/5/7 11:17
  * @Version: v1.0
  */
 @RestController
-@RequestMapping(value="threadlocal")
-public class ThreadHoleController {
+@RequestMapping("threadlocal")
+public class ThreadLocalMisuseController {
 
-    private ThreadLocal<Integer> currentUser = ThreadLocal.withInitial(() -> null);
+    private static final ThreadLocal<Integer> currentUser = ThreadLocal.withInitial(() -> null);
 
     /*
         反例结果展示：
@@ -40,17 +40,13 @@ public class ThreadHoleController {
         样会遇到这个问题。
      */
     @GetMapping("wrong")
-    public Map wrong (@RequestParam("userId") Integer userId) {
-        // 设置用户信息之前先查询一次ThreadLocal中的用户信息
-        String before = Thread.currentThread().getName() + ":" + currentUser.get();
-        // 设置用户信息到ThreadLocal
+    public Map wrong(@RequestParam("userId") Integer userId) {
+        String before  = Thread.currentThread().getName() + ":" + currentUser.get();
         currentUser.set(userId);
-        // 设置用户信息之后再查询一次ThreadLocal中的用户信息
-        String after = Thread.currentThread().getName() + ":" + currentUser.get();
-        // 汇总输出两次查询结果
+        String after  = Thread.currentThread().getName() + ":" + currentUser.get();
         Map result = new HashMap();
-        result.put("before",before);
-        result.put("after",after);
+        result.put("before", before);
+        result.put("after", after);
         return result;
     }
 
@@ -67,21 +63,16 @@ public class ThreadHoleController {
         }
      */
     @GetMapping("right")
-    public Map right (@RequestParam("userId") Integer userId) {
-        // 设置用户信息之前先查询一次ThreadLocal中的用户信息
-        String before = Thread.currentThread().getName() + ":" + currentUser.get();
-        // 设置用户信息到ThreadLocal
+    public Map right(@RequestParam("userId") Integer userId) {
+        String before  = Thread.currentThread().getName() + ":" + currentUser.get();
         currentUser.set(userId);
         try {
-            // 设置用户信息之后再查询一次ThreadLocal中的用户信息
             String after = Thread.currentThread().getName() + ":" + currentUser.get();
-            // 汇总输出两次查询结果
             Map result = new HashMap();
-            result.put("before",before);
-            result.put("after",after);
+            result.put("before", before);
+            result.put("after", after);
             return result;
         } finally {
-            // 在finally代码块中删除ThreadLocal中的数据,确保数据不串
             currentUser.remove();
         }
     }

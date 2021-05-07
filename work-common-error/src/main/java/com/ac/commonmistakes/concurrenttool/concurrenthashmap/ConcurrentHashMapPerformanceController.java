@@ -1,4 +1,4 @@
-package com.ac.common.error.code.controller.toolsafe;
+package com.ac.commonmistakes.concurrenttool.concurrenthashmap;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
@@ -17,15 +17,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * @Description: 使用ConcurrentHashMap统计key出现次数的场景
+ * @Description: 没有充分了解并发工具的特性，从而无法发挥其威力
  * @Author: zhangyadong
- * @Date: 2021/4/16 16:10
+ * @Date: 2021/5/7 10:59
  * @Version: v1.0
  */
 @Slf4j
 @RestController
-@RequestMapping("concurrenthashmapcount")
-public class ConcurrentHashMapCountController {
+@RequestMapping("concurrenthashmapformance")
+public class ConcurrentHashMapPerformanceController {
 
     // 循环次数
     private static int LOOP_COUNT = 10000000;
@@ -41,7 +41,7 @@ public class ConcurrentHashMapCountController {
         ConcurrentHashMap<String,Long> freqs = new ConcurrentHashMap<>(ITEM_COUNT);
         ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
         forkJoinPool.execute(() -> IntStream.rangeClosed(1,LOOP_COUNT).parallel().forEach(i -> {
-                //获得一个随机key
+            //获得一个随机key
             String key = "item" + ThreadLocalRandom.current().nextInt(ITEM_COUNT);
             synchronized (freqs) {
                 if (freqs.containsKey(key)) {
@@ -54,7 +54,7 @@ public class ConcurrentHashMapCountController {
             }
         }));
         forkJoinPool.shutdown();
-        forkJoinPool.awaitTermination(1,TimeUnit.HOURS);
+        forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
         return freqs;
     }
 
@@ -63,7 +63,7 @@ public class ConcurrentHashMapCountController {
      */
     private Map<String,Long> gooduse() throws InterruptedException {
         // LongAdder线程安全的累加器,因此可以直接调用increment进行进行累加
-        ConcurrentHashMap<String,LongAdder> freqs = new ConcurrentHashMap<>(ITEM_COUNT);
+        ConcurrentHashMap<String, LongAdder> freqs = new ConcurrentHashMap<>(ITEM_COUNT);
         ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
         forkJoinPool.execute(() -> IntStream.rangeClosed(1,LOOP_COUNT).parallel().forEach(i -> {
             // 获得一个随机key
@@ -83,7 +83,7 @@ public class ConcurrentHashMapCountController {
     }
 
     /**
-     * @description: 验证
+     * @description: 验证结果
      * 结果：
      * 6292536300  089%  normaluse
      * 766471200  011%  gooduse

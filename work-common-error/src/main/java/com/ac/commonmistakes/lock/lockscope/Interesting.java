@@ -1,4 +1,4 @@
-package com.ac.common.error.code.controller.lock;
+package com.ac.commonmistakes.lock.lockscope;
 
 import lombok.extern.slf4j.Slf4j;
 

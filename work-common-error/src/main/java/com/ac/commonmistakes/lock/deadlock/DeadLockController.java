@@ -1,4 +1,4 @@
-package com.ac.common.error.code.controller.lock;
+package com.ac.commonmistakes.lock.deadlock;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.List;
 
 /**
  * @Description: 多把锁要小心死锁问题

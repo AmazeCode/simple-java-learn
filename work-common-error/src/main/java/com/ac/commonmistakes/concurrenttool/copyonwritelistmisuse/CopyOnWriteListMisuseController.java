@@ -1,4 +1,4 @@
-package com.ac.common.error.code.controller.toolsafe;
+package com.ac.commonmistakes.concurrenttool.copyonwritelistmisuse;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -14,21 +13,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * @Description: CopyOnWriteArrayList 读写性能测试
+ * @Description: 没有认清并发工具的使用场景，因而导致性能问题(CopyOnWriteArrayList 读写性能测试)
  * @Author: zhangyadong
- * @Date: 2021/4/18 16:58
+ * @Date: 2021/5/7 11:08
  * @Version: v1.0
  */
 @Slf4j
 @RestController
-@RequestMapping("copyonwritearraylist")
-public class CopyOnWriteArrayListController {
+@RequestMapping("copyonwritelistmisuse")
+public class CopyOnWriteListMisuseController {
 
     /*
-        结论:synchronizedList写的性能高于CopyOnWriteArrayList的性能
-        6241326200  099%  Write:copyOnWriteArrayList
-        040660100  001%  Write:synchronizedList
-     */
+       结论:synchronizedList写的性能高于CopyOnWriteArrayList的性能
+       6241326200  099%  Write:copyOnWriteArrayList
+       040660100  001%  Write:synchronizedList
+    */
     // 测试并发写性能
     @GetMapping("write")
     public Map testWrite() {

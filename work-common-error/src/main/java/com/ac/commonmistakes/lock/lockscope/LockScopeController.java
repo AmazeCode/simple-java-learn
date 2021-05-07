@@ -1,6 +1,6 @@
-package com.ac.common.error.code.controller.lock;
+package com.ac.commonmistakes.lock.lockscope;
 
-import com.ac.common.error.code.controller.lock.pojo.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.stream.IntStream;
 
 /**
- * @Description: 锁测试
+ * @Description: 加锁要考虑锁的粒度和场景问题
  * @Author: zhangyadong
  * @Date: 2021/4/20 11:03
  * @Version: v1.0
  */
+@Slf4j
 @RestController
-@RequestMapping("locklevelcontroller")
-public class LockLevelController {
+@RequestMapping("lockscope")
+public class LockScopeController {
 
     /*
         加锁前先要清楚锁和对象是不是一个层面的：
@@ -41,6 +42,4 @@ public class LockLevelController {
         IntStream.rangeClosed(1, count).parallel().forEach(i -> new Data().right());
         return Data.getCounter();
     }
-
-
 }

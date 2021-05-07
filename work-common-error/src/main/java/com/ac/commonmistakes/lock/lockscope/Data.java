@@ -1,4 +1,4 @@
-package com.ac.common.error.code.controller.lock.pojo;
+package com.ac.commonmistakes.lock.lockscope;
 
 import lombok.Getter;
 
