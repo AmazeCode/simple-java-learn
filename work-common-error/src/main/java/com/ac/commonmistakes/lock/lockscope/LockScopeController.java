@@ -28,7 +28,7 @@ public class LockScopeController {
     public int wrong (@RequestParam(value = "count",defaultValue = "1000000") int count) {
 
         Data.reset();
-        //多线程循环一定次数调用Data类不同实列的wrong方法
+        //for循环一定次数调用Data类不同实列的wrong方法
         IntStream.rangeClosed(1, count).parallel().forEach(i -> new Data().wrong());
         return Data.getCounter();
     }
@@ -38,8 +38,26 @@ public class LockScopeController {
     public int right (@RequestParam(value = "count",defaultValue = "1000000") int count) {
 
         Data.reset();
-        //多线程循环一定次数调用Data类不同实列的right方法
+        //for循环一定次数调用Data类不同实列的right方法
         IntStream.rangeClosed(1, count).parallel().forEach(i -> new Data().right());
         return Data.getCounter();
+    }
+
+    @GetMapping("wrong2")
+    public String wrong2() {
+        Interesting interesting = new Interesting();
+        // 多线程调用非同步比较方法,会产生线程安全问题
+        new Thread(() -> interesting.add()).start();
+        new Thread(() -> interesting.compare()).start();
+        return "OK";
+    }
+
+    @GetMapping("right2")
+    public String right2() {
+        Interesting interesting = new Interesting();
+        // 多线程调用同步比较方法,不会产生线程安全问题
+        new Thread(() -> interesting.add()).start();
+        new Thread(() -> interesting.compareRight()).start();
+        return "OK";
     }
 }

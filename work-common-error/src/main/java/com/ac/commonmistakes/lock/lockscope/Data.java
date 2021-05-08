@@ -14,6 +14,9 @@ public class Data {
     @Getter
     private static int counter = 0;
 
+    /*
+        重置counter
+     */
     public static int reset() {
         counter = 0;
         return counter;
@@ -31,6 +34,9 @@ public class Data {
      */
     private static Object locker = new Object();
 
+    /*
+        同步代码块锁住共享变量
+     */
     public void right() {
         synchronized (locker) {
             counter++;
