@@ -80,11 +80,11 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-influx</artifactId>
         </dependency>-->
-        <!-- redis 暂时不需要 -->
-        <!--<dependency>
+        <!-- redis 客户端 -->
+        <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -182,6 +182,14 @@
             <artifactId>slf4j-ext</artifactId>
             <version>1.7.12</version>
         </dependency>
+
+        <!-- jodd-core 只能选用5.0.13版本否则没有setNameFormat -->
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-core</artifactId>
+            <version>5.0.13</version>
+        </dependency>
+
     </dependencies>
 
     <build>
