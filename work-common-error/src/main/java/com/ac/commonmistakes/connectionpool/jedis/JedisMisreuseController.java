@@ -81,6 +81,7 @@ public class JedisMisreuseController {
 
     /*
         正确示例
+        总结:如果不使用jedisPool,每个Thread单独new Jedis("127.0.0.1",6379);同样也不会出现线程安全问题,也就是说在多线程环境中,只要不公用资源便不会出现线程安全问题
      */
     @GetMapping("right")
     public void right () throws InterruptedException {

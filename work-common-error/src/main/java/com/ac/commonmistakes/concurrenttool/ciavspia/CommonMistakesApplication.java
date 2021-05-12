@@ -25,7 +25,7 @@ public class CommonMistakesApplication {
 
     /*
         测试结论:
-        putIfAbsent:返回旧值,如果没有则返回null(先计算value,再判断key是否存在) 不支持lambda表达式
+        putIfAbsent:返回旧值,如果没有旧值则返回null(先计算value,再判断key是否存在) 不支持lambda表达式
         computeIfAbsent:存在时返回存在的值,不存在时返回新值(当key不存在时，执行value计算方法，计算value)  赋值支持lambda表达式
         HashMap的put值可以为null,ConcurrentHashMap的put值不能为null
      */
